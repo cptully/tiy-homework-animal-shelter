@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Created by chris on 8/12/16.
  */
@@ -7,6 +9,9 @@ public class Animal {
     public String species;
     public String breed;
     public String description;
+    //public double weight;
+    //public String color;
+    //public HashMap<String, String> immunizations = new HashMap<>();
 
     public Animal(String name, String species, String breed, String description) {
         this.name = name;

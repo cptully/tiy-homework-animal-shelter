@@ -32,6 +32,14 @@ public class MenuService {
         return waitForYesNo("Are you sure you want to exit? (y/n)");
     }
 
+/*    // Verify weight
+    public double promptForWeight(String name, Animal animal) {
+        if (animal) {
+            System.out.println();
+        }
+        return waitForDouble("Please enter " + name + "'s weight:");
+    }
+*/
     // confirm choice to remove animal
     public String promptForRemove(String animalName) {
         return waitForYesNo("Are you sure you want to remove " + animalName + "from the shelter?\" (y/n)");
@@ -46,9 +54,6 @@ public class MenuService {
     public String promptForString(String message) {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println(message);
-
         String input = scanner.nextLine();
         return input.trim();
     }
@@ -63,6 +68,26 @@ public class MenuService {
         int value;
         try {
             value = Integer.parseInt(input);
+
+        } catch(Exception e){
+            System.out.println("\nPlease provide a number.\n");
+
+            value = waitForInt(message);
+        }
+
+        return value;
+    }
+
+    private double waitForDouble(String message) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println(message);
+
+        String input = scanner.nextLine();
+
+        double value;
+        try {
+            value = Double.parseDouble(input);
 
         } catch(Exception e){
             System.out.println("\nPlease provide a number.\n");

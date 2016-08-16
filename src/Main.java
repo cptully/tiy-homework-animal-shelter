@@ -5,6 +5,9 @@ public class Main {
     public static void main(String [] args) {
         MenuService menu = new MenuService();
         AnimalsService animals = new AnimalsService();
+        animals.addAnimal("Shadow", "dog", "border collie", "energetic and friendly; liked to chase balls");
+        animals.addAnimal("Mia", "cat", "domestic short hair", "skittish");
+        animals.addAnimal("Rags", "cat", "domestic short hair", "likes to hunt");
 
         int choice = 0;
         int subChoice = 0;
@@ -23,7 +26,7 @@ public class Main {
                     if (subChoice == 0) {
                         animals.listAnimals();
                     } else {
-                        System.out.println(animals.getAnimal(subChoice).toString("v"));
+                        animals.displayAnimal(subChoice - 1);
                     }
                     break;
                 case 4:             //4) Edit an animal
@@ -31,7 +34,7 @@ public class Main {
                     if (subChoice == 0) {
                         animals.listAnimals();
                     } else {
-                        animals.editAnimal(subChoice);
+                        animals.editAnimal(subChoice - 1);
                     }
                     break;
                 case 5:             //5) Delete an animal
@@ -39,7 +42,7 @@ public class Main {
                     if (subChoice == 0) {
                         animals.listAnimals();
                     } else {
-                        animals.removeAnimal(subChoice);
+                        animals.removeAnimal(subChoice - 1);
                     }
                     break;
                 case 6:             //6) Quit
