@@ -32,14 +32,14 @@ public class MenuService {
         return waitForYesNo("Are you sure you want to exit? (y/n)");
     }
 
-/*    // Verify weight
-    public double promptForWeight(String name, Animal animal) {
-        if (animal) {
-            System.out.println();
+    /*    // Verify weight
+        public double promptForWeight(String name, Animal animal) {
+            if (animal) {
+                System.out.println();
+            }
+            return waitForDouble("Please enter " + name + "'s weight:");
         }
-        return waitForDouble("Please enter " + name + "'s weight:");
-    }
-*/
+    */
     // confirm choice to remove animal
     public String promptForRemove(String animalName) {
         return waitForYesNo("Are you sure you want to remove " + animalName + "from the shelter?\" (y/n)");
@@ -48,7 +48,7 @@ public class MenuService {
     // used in multiple places to interact with AnimalService
     public int promptForAnimalToView(String prompt) {
         return waitForInt("\n\nPlease enter the index of the animal you want to " + prompt + ". " +
-                          "\n(enter 0 to see a list of all animals)");
+                "\n(enter 0 to see a list of all animals)");
     }
 
     public String promptForString(String message) {
@@ -56,6 +56,12 @@ public class MenuService {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         return input.trim();
+    }
+
+
+    public double promptForWeight(String name) {
+        //System.out.printf("%s's weight: ", name);
+        return waitForDouble(name + "'s weight: ");
     }
 
     private int waitForInt(String message) {
@@ -69,7 +75,7 @@ public class MenuService {
         try {
             value = Integer.parseInt(input);
 
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println("\nPlease provide a number.\n");
 
             value = waitForInt(message);
@@ -89,7 +95,7 @@ public class MenuService {
         try {
             value = Double.parseDouble(input);
 
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println("\nPlease provide a number.\n");
 
             value = waitForInt(message);
@@ -100,19 +106,22 @@ public class MenuService {
 
     private String waitForYesNo(String message) {
         Scanner scanner = new Scanner(System.in);
+        String answer;
 
         System.out.println(message);
 
         String input = scanner.nextLine();
-        String answer = input.substring(0, 1);
+        if (input.equals("")) {
+            answer = "";
+        } else {
+            answer = input.substring(0, 1);
+        }
         if ((answer.equals("y")) || (answer.equals("n"))) {
             return answer;
         } else {
-            answer = waitForYesNo("Please enter either \"y\" for yes or n for no.");
+            answer = waitForYesNo("Please enter either \"y\" for yes or \"n\" for no.");
         }
 
         return answer;
     }
-
-
 }

@@ -9,12 +9,12 @@ public class Animal {
     public String species;
     public String breed;
     public String description;
-    //public double weight;
-    //public String color;
-    //public HashMap<String, String> immunizations = new HashMap<>();
+    public String color;
+    //MedicalRecord medicalRecord = new MedicalRecord();
 
     public Animal(String name, String species, String breed, String description) {
         this.name = name;
+        //this.medicalRecord.name = name;
         this.species = species;
         this.breed = breed;
         this.description = description;
@@ -36,6 +36,7 @@ public class Animal {
     }
 
     public String toString(String verbose){
-        return this.name + ", " + this.species + ", " + this.breed + "\n\t" + this.description;
+        return "Name:\t\t\t" + this.name + "\nSpecies:\t\t" + this.species +
+                "\nBreed:\t\t\t" + this.breed + "\nDescription:\t" + this.description;
     }
 }

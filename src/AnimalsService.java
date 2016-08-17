@@ -29,7 +29,7 @@ public class AnimalsService {
         String description = addMenu.promptForString("Please add any descriptive information about the new animal:");
         Animal newAnimal = new Animal(name, species, breed, description);
         animalList.add(newAnimal);
-        //newAnimal.weight = addMenu.promptForWeight(name);
+        //newAnimal.medicalRecord.setWeight(addMenu.promptForWeight(name));
         //newAnimal.color = addMenu.promptForString("please enter " + name + "'s color:");
     }
 
@@ -81,13 +81,13 @@ public class AnimalsService {
         String answer = menu.promptForRemove(name);
         if (answer.equals("y")) {
             animalList.remove(index);
-            System.out.println(name + " has been removed from the shelter!");
+            System.out.println("\n" + name + " has been removed from the shelter!");
         }
     }
 
     public void displayAnimal(int index) {
         System.out.println(animalList.get(index).toString("v"));
         MenuService menu = new MenuService();
-        menu.promptForString("Press any key to continue...");
+        menu.promptForString("\nPress any key to continue...");
     }
 }

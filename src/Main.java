@@ -5,6 +5,8 @@ public class Main {
     public static void main(String [] args) {
         MenuService menu = new MenuService();
         AnimalsService animals = new AnimalsService();
+
+        //test data
         animals.addAnimal("Shadow", "dog", "border collie", "energetic and friendly; liked to chase balls");
         animals.addAnimal("Mia", "cat", "domestic short hair", "skittish");
         animals.addAnimal("Rags", "cat", "domestic short hair", "likes to hunt");
