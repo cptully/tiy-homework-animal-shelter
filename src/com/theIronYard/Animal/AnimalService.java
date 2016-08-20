@@ -6,46 +6,26 @@ import java.util.ArrayList;
  * Created by chris on 8/12/16.
  */
 public class AnimalService {
-    private ArrayList<Animal> animalList = new ArrayList<>(10);
+    // properties
+    private AnimalRepository animalList = new AnimalRepository();
+    public ArrayList<String> listAnimals() { return animalList.list(); }
 
-    private static final boolean USE_DEMO_DATA = true;
+    // methods
 
-    public AnimalService() {
+    /**
+     * getAnimal gets the animal object for the submitted integer index
+     * @param index - the object to be returned
+     * @return an Animal object
+     */
+    public Animal getAnimal(int index) { return animalList.get(index); }
 
-        //test data
-        if (USE_DEMO_DATA)
-
-        {
-            //AnimalService animals = new AnimalService();
-            addAnimal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls");
-            addAnimal("Mia", "cat", "domestic short hair", "calico", "skittish");
-            addAnimal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt");
-        }
-
-    }
-
-    public ArrayList<String> listAnimals() {
-        ArrayList<String> animalListString = new ArrayList<>();
-
-        for (Animal animal : animalList) {
-            animalListString.add(animal.toString());
-        }
-        return animalListString;
-    }
-
-    public Animal getAnimal(int index) {
-        return animalList.get(index);
-    }
-
-    public void addAnimal(Animal newAnimal) {
-        animalList.add(newAnimal);
-    }
-
+    public void addAnimal(Animal newAnimal) { animalList.add(newAnimal); }
+/*
     public void addAnimal(String name, String species, String breed, String color, String description) {
         Animal newAnimal = new Animal(name, species, breed, color, description);
         animalList.add(newAnimal);
     }
-
+*/
     public void editAnimal(int index, String name, String species, String breed, String color, String description) {
         Animal currentAnimal = animalList.get(index);
 
@@ -57,7 +37,7 @@ public class AnimalService {
     }
 
     public void editAnimal(Animal animal, int index) {
-        if (! animal.name.isEmpty()) {animalList.get(index).name = animal.name;}
+        // if (! animal.name.isEmpty()) {animalList.get(index).name = animal.name;}
         if (! animal.species.isEmpty()) {animalList.get(index).species = animal.species;}
         if (! animal.breed.isEmpty()) {animalList.get(index).breed = animal.breed;}
         if (! animal.color.isEmpty()) {animalList.get(index).color = animal.color;}
@@ -70,15 +50,8 @@ public class AnimalService {
         }
     }
 
-    public boolean contains(Animal animal) {
-        return animalList.contains(animal);
-    }
+    public boolean contains(Animal animal) { return animalList.contains(animal); }
 
-    public boolean contains(int index) {
-        if ((index > 0) && (index < animalList.size())) {
-            return animalList.contains(animalList.get(index));
-        }
-        return false;
-    }
+    public boolean contains(int index) { return animalList.contains(index); }
 
 }

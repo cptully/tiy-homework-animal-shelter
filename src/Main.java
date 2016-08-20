@@ -2,18 +2,15 @@
  * Created by chris on 8/12/16.
  */
 public class Main {
-    private static MenuService menu = new MenuService();
 
     public static void main(String [] args) {
-        DisplayService display = new DisplayService();
-
-
+        MenuService menu = new MenuService();
         int choice;
         boolean running = true;
 
         while (running) {
 
-            choice = display.promptForMainMenuSelection();
+            choice = menu.showMenu();
             switch (choice) {
                 case 1:             //1) List animals
                     menu.listAnimals();

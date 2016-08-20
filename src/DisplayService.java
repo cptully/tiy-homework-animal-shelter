@@ -55,6 +55,11 @@ public class DisplayService {
         promptForString("Press <enter> to continue...");
     }
 
+    public void displayAnimal(AnimalService animals, int index) {
+        System.out.println(animals.getAnimal(index).toString("v"));
+        promptForString("Press <Enter> to continue");
+    }
+
     // used in multiple places to interact with AnimalService
     public int promptForAnimalToView(AnimalService animals, String prompt) {
         displayAnimalList(animals);
@@ -156,8 +161,4 @@ public class DisplayService {
         return answer;
     }
 
-    public void displayAnimal(AnimalService animals, int index) {
-        System.out.println(animals.getAnimal(index).toString("v"));
-        promptForString("Press <Enter> to continue");
-    }
 }

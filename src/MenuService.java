@@ -6,34 +6,36 @@ import com.theIronYard.Animal.Animal;
  */
 
 
-public class MenuService {
+class MenuService {
     private DisplayService display = new DisplayService();
     private AnimalService animals = new AnimalService();
 
+    int showMenu() {
+        return display.promptForMainMenuSelection();
+    }
 
-
-    public void addAnimal(){
+    void addAnimal() {
         Animal newAnimal = display.promptForNewAnimal();
         animals.addAnimal(newAnimal);
     }
 
-    public void listAnimals(){
+    void listAnimals(){
         display.displayAnimals(animals);
     }
 
-    public void viewAnimalDetails() {
+    void viewAnimalDetails() {
         int choice;
         choice = display.promptForAnimalToView(animals, "view");
         display.displayAnimal(animals, choice);
     }
 
-    public void editAnimal() {
+    void editAnimal() {
         int choice = display.promptForAnimalToView(animals, "edit");
         Animal newData = display.promptForNewAnimalData(animals.getAnimal(choice));
         animals.editAnimal(newData, choice);
     }
 
-    public void deleteAnimal() {
+    void deleteAnimal() {
         int choice;
 
         choice = display.promptForAnimalToView(animals, "delete");
