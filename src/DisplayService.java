@@ -1,5 +1,5 @@
 import com.theIronYard.Animal.Animal;
-import com.theIronYard.Animal.AnimalsService;
+import com.theIronYard.Animal.AnimalService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -42,7 +42,7 @@ public class DisplayService {
         return waitForYesNo("Are you sure you want to remove " + animalName + "from the shelter?\" (y/n)");
     }
 
-    private void displayAnimalList (AnimalsService animals) {
+    private void displayAnimalList (AnimalService animals) {
         ArrayList<String> animalList = animals.listAnimals();
         int i = 1;
         for (String animal: animalList) {
@@ -50,13 +50,13 @@ public class DisplayService {
         }
     }
 
-    public void displayAnimals(AnimalsService animals){
+    public void displayAnimals(AnimalService animals){
         displayAnimalList(animals);
         promptForString("Press <enter> to continue...");
     }
 
     // used in multiple places to interact with AnimalService
-    public int promptForAnimalToView(AnimalsService animals,  String prompt) {
+    public int promptForAnimalToView(AnimalService animals, String prompt) {
         displayAnimalList(animals);
         int choice = waitForInt("\n\nPlease enter the index of the animal you want to " + prompt + ". ");
         return --choice;
@@ -156,7 +156,7 @@ public class DisplayService {
         return answer;
     }
 
-    public void displayAnimal(AnimalsService animals, int index) {
+    public void displayAnimal(AnimalService animals, int index) {
         System.out.println(animals.getAnimal(index).toString("v"));
         promptForString("Press <Enter> to continue");
     }

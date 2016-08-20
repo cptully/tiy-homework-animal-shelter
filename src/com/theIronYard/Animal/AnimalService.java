@@ -5,18 +5,18 @@ import java.util.ArrayList;
 /**
  * Created by chris on 8/12/16.
  */
-public class AnimalsService {
+public class AnimalService {
     private ArrayList<Animal> animalList = new ArrayList<>(10);
 
     private static final boolean USE_DEMO_DATA = true;
 
-    public AnimalsService() {
+    public AnimalService() {
 
         //test data
         if (USE_DEMO_DATA)
 
         {
-            //AnimalsService animals = new AnimalsService();
+            //AnimalService animals = new AnimalService();
             addAnimal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls");
             addAnimal("Mia", "cat", "domestic short hair", "calico", "skittish");
             addAnimal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt");

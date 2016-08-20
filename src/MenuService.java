@@ -1,7 +1,5 @@
-import com.theIronYard.Animal.AnimalsService;
+import com.theIronYard.Animal.AnimalService;
 import com.theIronYard.Animal.Animal;
-
-import java.util.ArrayList;
 
 /**
  * Created by chris on 8/12/16.
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 
 public class MenuService {
     private DisplayService display = new DisplayService();
-    private AnimalsService animals = new AnimalsService();
+    private AnimalService animals = new AnimalService();
 
 
 
