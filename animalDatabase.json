@@ -1,1 +1,16 @@
-[{"name":"shadow","species":"canine","breed":"border collie","description":"happy","color":"black \u0026 white"},{"name":"myst","species":"cat","breed":"domestic long hair","description":"feisty","color":"grey tabby"}]
+[
+  {
+    "name": "shadow",
+    "species": "canine",
+    "breed": "border collie",
+    "description": "happy",
+    "color": "black \u0026 white"
+  },
+  {
+    "name": "myst",
+    "species": "cat",
+    "breed": "domestic long hair",
+    "description": "feisty",
+    "color": "grey tabby"
+  }
+]
