@@ -1,5 +1,8 @@
+import com.theIronYard.Animal.AnimalRepository;
 import com.theIronYard.Animal.AnimalService;
 import com.theIronYard.Animal.Animal;
+
+import java.nio.file.Paths;
 
 /**
  * Created by chris on 8/12/16.
@@ -8,7 +11,8 @@ import com.theIronYard.Animal.Animal;
 
 class MenuService {
     private DisplayService display = new DisplayService();
-    private AnimalService animals = new AnimalService();
+    private AnimalRepository dataStore = new AnimalRepository();
+    private AnimalService animals = new AnimalService(dataStore);
 
     int showMenu() {
         return display.promptForMainMenuSelection();

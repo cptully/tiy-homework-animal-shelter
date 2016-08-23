@@ -50,47 +50,52 @@ public class DisplayService {
         }
     }
 
-    public void displayAnimals(AnimalService animals){
+    void displayAnimals(AnimalService animals){
         displayAnimalList(animals);
-        promptForString("Press <enter> to continue...");
+        promptForString("Press <enter> to continue...", false);
     }
 
-    public void displayAnimal(AnimalService animals, int index) {
+    void displayAnimal(AnimalService animals, int index) {
         System.out.println(animals.getAnimal(index).toString("v"));
-        promptForString("Press <Enter> to continue");
+        promptForString("Press <Enter> to continue", false);
     }
 
     // used in multiple places to interact with AnimalService
-    public int promptForAnimalToView(AnimalService animals, String prompt) {
+    int promptForAnimalToView(AnimalService animals, String prompt) {
         displayAnimalList(animals);
         int choice = waitForInt("\n\nPlease enter the index of the animal you want to " + prompt + ". ");
         return --choice;
     }
 
-    public Animal promptForNewAnimal() {
-        String name = promptForString("Name: ");
-        String species = promptForString("Species: ");
-        String breed = promptForString("Breed: ");
-        String color = promptForString("Color: ");
-        String description = promptForString("Description: ");
+    Animal promptForNewAnimal() {
+        String name = promptForString("Name: ", true);
+        String species = promptForString("Species: ", true);
+        String breed = promptForString("Breed: ", true);
+        String color = promptForString("Color: ", true);
+        String description = promptForString("Description: ", true);
 
         return new Animal(name, species, breed, color, description);
     }
 
-    public Animal promptForNewAnimalData(Animal animal) {
-        String name = promptForString("Name (" + animal.getName() + "): ");
-        String species = promptForString("Species (" + animal.getSpecies() + "): ");
-        String breed = promptForString("Breed: (" + animal.getBreed() + "): ");
-        String color = promptForString("Color: (" + animal.getColor() + "): ");
-        String description = promptForString("Description: (" + animal.getDescription() + "): ");
+    Animal promptForNewAnimalData(Animal animal) {
+        String name = promptForString("Name (" + animal.getName() + "): ", false);
+        String species = promptForString("Species (" + animal.getSpecies() + "): ", false);
+        String breed = promptForString("Breed: (" + animal.getBreed() + "): ", false);
+        String color = promptForString("Color: (" + animal.getColor() + "): ", false);
+        String description = promptForString("Description: (" + animal.getDescription() + "): ", false);
 
         return new Animal(name, species, breed, color, description);
     }
 
-    public String promptForString(String message) {
+    private String promptForString(String message, boolean required) {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        input = input.trim();
+        if (input.isEmpty() && required) {
+            System.out.println("You must enter a value for: " + message);
+            promptForString(message, required);
+        }
         return input.trim();
     }
 

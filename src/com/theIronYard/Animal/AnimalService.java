@@ -7,11 +7,15 @@ import java.util.ArrayList;
  */
 public class AnimalService {
     // properties
-    private AnimalRepository animalList = new AnimalRepository();
+    private AnimalRepository animalList;
     public ArrayList<String> listAnimals() { return animalList.list(); }
 
-    // methods
+    // Constructor
+    public AnimalService(AnimalRepository animalList) {
+        this.animalList = animalList;
+    }
 
+    // methods
     /**
      * getAnimal gets the animal object for the submitted integer index
      * @param index - the object to be returned
@@ -34,7 +38,10 @@ public class AnimalService {
         currentAnimal.breed = breed;
         currentAnimal.color = color;
         currentAnimal.description = description;
+
+        animalList.writeDB();
     }
+
 
     public void editAnimal(Animal animal, int index) {
         // if (! animal.name.isEmpty()) {animalList.get(index).name = animal.name;}
@@ -42,6 +49,8 @@ public class AnimalService {
         if (! animal.breed.isEmpty()) {animalList.get(index).breed = animal.breed;}
         if (! animal.color.isEmpty()) {animalList.get(index).color = animal.color;}
         if (! animal.description.isEmpty()) {animalList.get(index).description = animal.description;}
+
+        animalList.writeDB();
     }
 
     public void removeAnimal(int index) {
@@ -53,5 +62,4 @@ public class AnimalService {
     public boolean contains(Animal animal) { return animalList.contains(animal); }
 
     public boolean contains(int index) { return animalList.contains(index); }
-
 }

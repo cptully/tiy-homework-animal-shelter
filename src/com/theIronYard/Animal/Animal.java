@@ -12,11 +12,6 @@ public class Animal {
     String description;
     String color;
 
-
-//    public Animal() {
-//
-//    }
-
     public Animal(String name, String species, String breed, String color, String description) {
         this.name = name;
         this.species = species;
@@ -25,38 +20,18 @@ public class Animal {
         this.description = description;
     }
 
-    public String getName(){
-        return this.name;
-    }
-    public String getSpecies(){
-        return this.species;
-    }
-    public String getBreed(){
-        return this.breed;
-    }
-    public String getDescription(){
-        return this.description;
-    }
-    public String getColor(){
-        return this.color;
-    }
+    public String getName(){ return this.name; }
+    public String getSpecies(){ return this.species; }
+    public String getBreed(){ return this.breed; }
+    public String getDescription(){ return this.description; }
+    public String getColor(){ return this.color; }
 
     /* not sure I need all of these
-    public String setName(){
-        return this.name;
-    }
-    public String setSpecies(){
-        return this.species;
-    }
-    public String setBreed(){
-        return this.breed;
-    }
-    public String setDescription(){
-        return this.description;
-    }
-    public String setColor(){
-        return this.color;
-    }
+    public String setName(name){ this.name = name; }
+    public String setSpecies(species){ this.species = species; }
+    public String setBreed(breed){ this.breed = breed; }
+    public String setDescription(description){ this.description = description; }
+    public String setColor(color){ this.color = color; }
     */
 
     @Override
