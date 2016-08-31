@@ -1,6 +1,8 @@
 import com.theIronYard.Animal.Animal;
 import com.theIronYard.Animal.AnimalService;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,6 +10,24 @@ import java.util.Scanner;
  * Created by chris on 8/19/16.
  */
 public class DisplayService {
+    private InputStream in = System.in;
+    private OutputStream out = System.out;
+
+    public InputStream getIn() {
+        return in;
+    }
+
+    public void setIn(InputStream in) {
+        this.in = in;
+    }
+
+    public OutputStream getOut() {
+        return out;
+    }
+
+    public void setOut(OutputStream out) {
+        this.out = out;
+    }
 
     public int promptForMainMenuSelection() {
 
@@ -24,7 +44,7 @@ public class DisplayService {
         int choice = waitForInt("Please choose an option:");
 
         //check for valid input
-        if ((choice < 1) && (choice > 6)) {
+        if ((choice < 1) || (choice > 6)) {
             System.out.println("\n\n\n\n\n\n\nPlease choose a number between 1 and 6");
             choice = promptForMainMenuSelection();
         }
@@ -89,7 +109,7 @@ public class DisplayService {
 
     private String promptForString(String message, boolean required) {
         System.out.println(message);
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(in);
         String input = scanner.nextLine();
         input = input.trim();
         if (input.isEmpty() && required) {

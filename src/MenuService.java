@@ -10,10 +10,28 @@ import java.nio.file.Paths;
 
 
 class MenuService {
-    private DisplayService display = new DisplayService();
-    private AnimalRepository dataStore = new AnimalRepository();
-    private AnimalService animals = new AnimalService(dataStore);
+    private DisplayService display; // = new DisplayService();
+    //private AnimalRepository dataStore; // = new AnimalRepository();
+    private AnimalService animals; // = new AnimalService(dataStore);
 
+    /**
+     * The MenuService constructor requires both DisplayService and
+     * AnimalService parameters that it uses in coordinating the
+     * menu selected activities.
+     *
+     * @param display DisplayService object for interfacing to the display
+     * @param animals AnimalService object for interfacing to the Animal Repository
+     */
+    public MenuService(DisplayService display, AnimalService animals) {
+        this.display = display;
+        this.animals = animals;
+    }
+
+    /**
+     * Calls the main menu display function and returns the user's choice.
+     *
+     * @return int value representing the user's choice
+     */
     int showMenu() {
         return display.promptForMainMenuSelection();
     }

@@ -1,10 +1,18 @@
+import com.theIronYard.Animal.Animal;
+import com.theIronYard.Animal.AnimalRepository;
+import com.theIronYard.Animal.AnimalService;
+
 /**
  * Created by chris on 8/12/16.
  */
 public class Main {
 
     public static void main(String [] args) {
-        MenuService menu = new MenuService();
+        DisplayService display = new DisplayService();
+        AnimalRepository dataStore = new AnimalRepository();
+        AnimalService animals = new AnimalService(dataStore);
+
+        MenuService menu = new MenuService(display, animals);
         int choice;
         boolean running = true;
 

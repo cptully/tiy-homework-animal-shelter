@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ListIterator;
 
 /**
@@ -17,7 +16,7 @@ import java.util.ListIterator;
 public class AnimalRepository {
     // properties
     private ArrayList<Animal> animalList = new ArrayList<>(10);
-    Path path = Paths.get("./animalDatabase.json");
+    private Path path = Paths.get("./animalDatabase.json");
 
     private static final boolean USE_DEMO_DATA = false;
 
@@ -35,8 +34,18 @@ public class AnimalRepository {
         }
     }
 
+    public Path getPath() {
+        return path;
+    }
+
+    public void setPath(Path path) {
+        if ((path != null) && (!path.toString().equals(""))) this.path = path;
+    }
+
     // methods used by other Animal Service
-    Animal get(int index) { return animalList.get(index); }
+    Animal get(int index) {
+        return animalList.get(index);
+    }
 
     boolean add(Animal animal) {
         boolean newAnimal =  animalList.add(animal);
@@ -61,6 +70,8 @@ public class AnimalRepository {
 
     boolean contains(Animal animal) { return animalList.contains(animal); }
 
+//    int size() {return animalList.size();}
+
     ArrayList<String> list() {
         ArrayList<String> animalListString = new ArrayList<>();
 
@@ -72,8 +83,30 @@ public class AnimalRepository {
         return animalListString;
     }
 
+    public void editAnimal(int index, String name, String species, String breed, String color, String description) {
+        Animal currentAnimal = animalList.get(index);
+
+        //currentAnimal.setName(name);
+        currentAnimal.setSpecies(species);
+        currentAnimal.setBreed(breed);
+        currentAnimal.setColor(color);
+        currentAnimal.setDescription(description);
+
+        writeDB();
+    }
+
+    public void editAnimal(Animal animal, int index) {
+        // if (! animal.name.isEmpty()) {animalList.get(index).name = animal.name;}
+        if (! animal.getSpecies().isEmpty()) {animalList.get(index).setSpecies(animal.getSpecies());}
+        if (! animal.getBreed().isEmpty()) {animalList.get(index).setBreed(animal.getBreed());}
+        if (! animal.getColor().isEmpty()) {animalList.get(index).setColor(animal.getColor());}
+        if (! animal.getDescription().isEmpty()) {animalList.get(index).setDescription(animal.getDescription());}
+
+        writeDB();
+    }
+
     // persistence methods
-    void writeDB(){
+    private void writeDB(){
         // Write out the animalList as a json file
         ArrayList<String> json = new ArrayList<>();
         json.add(new Gson().toJson(animalList));
@@ -84,7 +117,7 @@ public class AnimalRepository {
         }
     }
 
-    void readDB() {
+    private void readDB() {
         try {
             String json = new String(Files.readAllBytes(path));
 
@@ -92,11 +125,8 @@ public class AnimalRepository {
             Type listType = new TypeToken<ArrayList<Animal>>(){}.getType();
 
             // convert the JSON back to a map of arrays of recipes
-            ArrayList<Animal> loadedAnimals = new Gson().fromJson(json, listType);
+            animalList = new Gson().fromJson(json, listType);
 
-            for(Animal animal: loadedAnimals) {
-                animalList.add(animal);
-            }
         } catch(IOException ex) {
             System.out.println("error writing file");
         }

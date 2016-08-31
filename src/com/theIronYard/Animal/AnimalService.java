@@ -7,59 +7,79 @@ import java.util.ArrayList;
  */
 public class AnimalService {
     // properties
-    private AnimalRepository animalList;
-    public ArrayList<String> listAnimals() { return animalList.list(); }
+    private AnimalRepository animalRepo;
 
-    // Constructor
-    public AnimalService(AnimalRepository animalList) {
-        this.animalList = animalList;
+    /**
+     * The AnimalService class constructor requires an AnimalRepository object
+     *
+     * @param animalRepo an AnimalRepository object
+     */
+    public AnimalService(AnimalRepository animalRepo) {
+        this.animalRepo = animalRepo;
     }
 
-    // methods
+    /****************************
+     * methods                  *
+     ****************************/
+
+    /**
+     * listAnimals
+     *
+     * @return ArrayList&lt;String&gt; of string representations of animals
+     */
+    public ArrayList<String> listAnimals() { return animalRepo.list(); }
+
     /**
      * getAnimal gets the animal object for the submitted integer index
      * @param index - the object to be returned
      * @return an Animal object
      */
-    public Animal getAnimal(int index) { return animalList.get(index); }
+    public Animal getAnimal(int index) {return animalRepo.get(index); }
 
-    public void addAnimal(Animal newAnimal) { animalList.add(newAnimal); }
-/*
-    public void addAnimal(String name, String species, String breed, String color, String description) {
-        Animal newAnimal = new Animal(name, species, breed, color, description);
-        animalList.add(newAnimal);
-    }
-*/
-    public void editAnimal(int index, String name, String species, String breed, String color, String description) {
-        Animal currentAnimal = animalList.get(index);
+    /**
+     * addAnimal adds the supplied Animal to the AnimalRepository
+     *
+     * @param newAnimal Animal to be added
+     */
+    public void addAnimal(Animal newAnimal) { animalRepo.add(newAnimal); }
 
-        currentAnimal.name = name;
-        currentAnimal.species = species;
-        currentAnimal.breed = breed;
-        currentAnimal.color = color;
-        currentAnimal.description = description;
-
-        animalList.writeDB();
-    }
-
-
+    /**
+     * editAnimal passes the edited animal to AnimalRepository
+     *
+     * @param animal the edited animal
+     * @param index the index in the repository of the animal to update
+     */
     public void editAnimal(Animal animal, int index) {
-        // if (! animal.name.isEmpty()) {animalList.get(index).name = animal.name;}
-        if (! animal.species.isEmpty()) {animalList.get(index).species = animal.species;}
-        if (! animal.breed.isEmpty()) {animalList.get(index).breed = animal.breed;}
-        if (! animal.color.isEmpty()) {animalList.get(index).color = animal.color;}
-        if (! animal.description.isEmpty()) {animalList.get(index).description = animal.description;}
-
-        animalList.writeDB();
+        animalRepo.editAnimal(animal, index);
     }
 
+    /**
+     * editAnimal overloads editAnimal(animal, index) to accept the animal data
+     * as string values.
+     *
+     * @param index the index of the animal to update
+     * @param name the animal's name - ignored
+     * @param species the animal's speiecs
+     * @param breed the animal's breed
+     * @param color - color or description of the animal's coat
+     * @param description - description of the animal or behavioral traits
+     */
+    public void editAnimal(int index, String name, String species, String breed, String color, String description) {
+        animalRepo.editAnimal(index, name, species, breed, color, description);
+    }
+
+    /**
+     * removeAnimal removes the selected animal from the repository
+     *
+     * @param index the zero based index of the animal to remove
+     */
     public void removeAnimal(int index) {
-        if ((index > 0) && (index < animalList.size())) {
-            animalList.remove(index);
+        if ((index > 0) && (index < animalRepo.size())) {
+            animalRepo.remove(index);
         }
     }
 
-    public boolean contains(Animal animal) { return animalList.contains(animal); }
+    public boolean contains(Animal animal) { return animalRepo.contains(animal); }
 
-    public boolean contains(int index) { return animalList.contains(index); }
+    public boolean contains(int index) { return animalRepo.contains(index); }
 }
