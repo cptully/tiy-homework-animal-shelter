@@ -56,9 +56,12 @@ public class AnimalRepository {
     int size() { return animalList.size(); }
 
     Animal remove(int index) {
-        Animal newAnimal = animalList.remove(index);
-        writeDB();
-        return newAnimal;
+        if ((index >= 0) && (index < animalList.size())) {
+            Animal newAnimal = animalList.remove(index);
+            writeDB();
+            return newAnimal;
+        }
+        return new Animal();
     }
 
     boolean contains(int index) {

@@ -74,9 +74,7 @@ public class AnimalService {
      * @param index the zero based index of the animal to remove
      */
     public void removeAnimal(int index) {
-        if ((index > 0) && (index < animalRepo.size())) {
-            animalRepo.remove(index);
-        }
+        animalRepo.remove(index);
     }
 
     public boolean contains(Animal animal) { return animalRepo.contains(animal); }

@@ -4,7 +4,6 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import java.nio.file.Path;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by chris on 8/28/16.
@@ -54,24 +52,6 @@ public class AnimalRepositoryTest {
     @Test
     /**
      * Given an Animal with valid data
-     * When that Animal is added to animalList
-     * Then the result is true
-     */
-    public void addAnimalNotFalseTest() {
-        // arrange
-        Animal newAnimal = new Animal("myst", "feline", "tabby", "grey", "skittish");
-
-        // act
-        boolean result = animalList.add(newAnimal);
-//        boolean result = animalList.get(0);
-
-        // assert
-        assertThat(result, is(true));
-    }
-
-    @Test
-    /**
-     * Given an Animal with valid data
      * When that Animal is retrieved
      * Then the instance returned is valid
      */
@@ -105,6 +85,25 @@ public class AnimalRepositoryTest {
 
     @Test
     /**
+     * Given an Animal with valid data
+     * When that Animal is added to animalList
+     * Then the result is true
+     */
+    public void addAnimalNotFalseTest() {
+        // arrange
+        Animal newAnimal = new Animal("myst", "feline", "tabby", "grey", "skittish");
+
+        // act
+        boolean result = animalList.add(newAnimal);
+//        boolean result = animalList.get(0);
+
+        // assert
+        assertThat(result, is(true));
+    }
+
+
+    @Test
+    /**
      * Given an AnimalRepository with known list of animals
      * When a specific animal is removed
      * Then that animal is removed
@@ -114,7 +113,7 @@ public class AnimalRepositoryTest {
         animalList.add(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
         animalList.add(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
         animalList.add(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
-        Animal newAnimal = new Animal("Myst", "feline", "tabby", "grey", "skittish");
+        Animal newAnimal = new Animal("Myst", "feline", "calico", "grey", "skittish");
         animalList.add(newAnimal);
 
         // act
@@ -122,6 +121,26 @@ public class AnimalRepositoryTest {
 
         // assert
         assertThat(result, is(newAnimal));
+    }
+
+    @Test
+    /**
+     * Given an AnimalRepository with known list of animals
+     * When given an index out of bounds
+     * Then nothing happens
+     */
+    public void removeAnimalHandlesIndexOutOfBoundsTest() {
+        // arrange
+        animalList.add(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
+        animalList.add(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
+        animalList.add(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
+        Animal expectedResult = new Animal();
+
+        // act
+        Animal result = animalList.remove(animalList.size());
+
+        // assert
+        assertThat(result, is(expectedResult));
     }
 
     @Test
@@ -190,11 +209,11 @@ public class AnimalRepositoryTest {
         animalList.add(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
         animalList.add(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
         Animal newAnimal = new Animal("Myst", "feline", "tabby", "grey", "skittish");
+        Animal expectedResult = new Animal("Rags", "feline", "tabby", "grey", "skittish");
 
         // act
         animalList.editAnimal(newAnimal, 2);
         Animal result = animalList.get(2);
-        Animal expectedResult = new Animal("Rags", "feline", "tabby", "grey", "skittish");
 
         // assert
         assertThat(result, equalTo(expectedResult));
@@ -211,11 +230,11 @@ public class AnimalRepositoryTest {
         animalList.add(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
         animalList.add(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
         animalList.add(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
+        Animal expectedResult = new Animal("Rags", "feline", "tabby", "grey", "skittish");
 
         // act
         animalList.editAnimal(2, "Myst", "feline", "tabby", "grey", "skittish");
         Animal result = animalList.get(2);
-        Animal expectedResult = new Animal("Rags", "feline", "tabby", "grey", "skittish");
 
         // assert
         assertThat(result, equalTo(expectedResult));

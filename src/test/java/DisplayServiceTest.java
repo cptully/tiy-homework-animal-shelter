@@ -1,20 +1,22 @@
+import com.sun.security.ntlm.Client;
 import com.theIronYard.Animal.Animal;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import org.hamcrest.core.IsEqual;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.mockito.Mockito.*;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.nio.file.Paths;
+import java.io.InputStreamReader;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 /**
  * Created by chris on 8/30/16.
@@ -133,8 +135,8 @@ public class DisplayServiceTest {
         };
     }
 
-    @Test
-    public void promptForNewAnimalDataTest() {
+    /*@Test
+    public void promptForNewAnimalDataTest() throws Exception {
         // arrange
         String name = "myst";
         String species = "feline";
@@ -146,10 +148,25 @@ public class DisplayServiceTest {
         String data = name + System.getProperty("line.separator") + species +"\r\n" + breed + "\r\n" + color +"\r\n" + description + "\r\n";
 
 
+
+        byte[] myBinaryData = "TEST".getBytes();
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(myBinaryData);
+
+        InputStream mockedIn = mock(InputStreamReader.class);
+
+        when(mockedIn.).thenAnswer(new Answer<Integer>() {
+            @Override
+            public Integer answer(InvocationOnMock invocationOnMock) throws Throwable {
+                Object[] args = invocationOnMock.getArguments();
+                byte[] output = (byte[]) args[0];
+                int offset = (int) args[1];
+                int length = (int) args[2];
+                return byteArrayInputStream.read(output, offset, length);
+            }
+        });
         // act
         try {
-            display.setIn(new ByteArrayInputStream(data.getBytes()));
-//            System.setIn(new ByteArrayInputStream(data.getBytes()));
+            display.setIn(mockedIn);
             result = display.promptForNewAnimal();
         } finally {
 //            System.setIn(stdin);
@@ -159,7 +176,7 @@ public class DisplayServiceTest {
         // assert
         assertThat(result, equalTo(expectedResult));
 
-    }
+    }*/
 
 
 }
