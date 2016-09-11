@@ -1,32 +1,36 @@
 package com.theIronYard.Animal;
 
 
+import java.util.ArrayList;
+
 /**
  * Created by chris on 8/12/16.
  */
 public class Animal {
-    //private String id;
+    private int id;
     private String name;
-    private String species;
-    private String breed;
+    private AnimalType type;
+    private AnimalBreed breed;
     private String description;
     private String color;
+    private ArrayList<Note> notes;
 
     /**
      * Animal constructor which creates a new animal with the specified properties.
      *
      * @param name String
-     * @param species String
+     * @param type String
      * @param breed String
      * @param color String
      * @param description String
      */
-    public Animal(String name, String species, String breed, String color, String description) {
+    public Animal(String name, AnimalType type, AnimalBreed breed, String color, String description) {
         this.name = name;
-        this.species = species;
-        this.breed = breed;
+        this.type = new AnimalType(type.getId(), type.getName());
+        this.breed = new AnimalBreed(breed.getId(), breed.getName());
         this.color = color;
         this.description = description;
+        this.notes = new ArrayList<>();
     }
 
     /**
@@ -34,57 +38,49 @@ public class Animal {
      */
     public Animal() {
         this.name = "";
-        this.species = "";
-        this.breed = "";
+        this.type = null;
+        this.breed = null;
         this.color = "";
         this.description = "";
+        this.notes = new ArrayList<>();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Animal animal = (Animal) o;
-
-        if (!getName().equals(animal.getName())) return false;
-        if (!getSpecies().equals(animal.getSpecies())) return false;
-        if (!getBreed().equals(animal.getBreed())) return false;
-        if (!getDescription().equals(animal.getDescription())) return false;
-        return getColor().equals(animal.getColor());
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getName().hashCode();
-        result = 31 * result + getSpecies().hashCode();
-        result = 31 * result + getBreed().hashCode();
-        result = 31 * result + getDescription().hashCode();
-        result = 31 * result + getColor().hashCode();
-        return result;
-    }
-
+    // getter methods
     public String getName(){ return this.name; }
-    public String getSpecies(){ return this.species; }
-    public String getBreed(){ return this.breed; }
+    public AnimalType getType(){ return this.type; }
+    public AnimalBreed getBreed(){ return this.breed; }
     public String getDescription(){ return this.description; }
     public String getColor(){ return this.color; }
+    public int getId() {return id;}
+    public ArrayList<Note> getNotes() {return notes;}
 
-    public void setName(String name){ this.name = name; }
-    public void setSpecies(String species){ this.species = species; }
-    public void setBreed(String breed){ this.breed = breed; }
-    public void setDescription(String description){ this.description = description; }
-    public void setColor(String color){ this.color = color; }
 
+    /*
+        The setter methods are package private because AnimalRepository exposes methods
+        for creating and editing animals.
+         */
+    void setName(String name){ this.name = name; }
+    void setType(AnimalType type){ this.type = type; }//    void setSpeciesID(int speciesID) {this.speciesID = speciesID;}
+    void setBreed(AnimalBreed breed){ this.breed = breed; }
+    void setDescription(String description){ this.description = description; }
+    void setColor(String color){ this.color = color; }
+    void setId(int id) {this.id = id;}
+    void setNotes(ArrayList<Note> notes) {
+        // create blank list
+        this.notes = new ArrayList<Note>();
+
+        // add notes to list instead of creating a link
+        this.notes.addAll(notes);
+    }
+    public void addNote(Note note) {this.notes.add(note);}
+    public void addNote(String note) {
+        Note newNote = new Note(note);
+        this.notes.add(newNote);
+    }
 
     @Override
-    /**
-     * Overrides the toString method and provides a simple one line string
-     * representation od the Animal.
-     */
     public String toString() {
-       return this.name + ", " + this.species + ", " + this.breed + ", " + this.color;
+       return this.name + ", " + this.type.getName() + ", " + this.breed.getName() + ", " + this.color;
     }
 
     /**
@@ -96,7 +92,33 @@ public class Animal {
      * @return String
      */
     public String toString(String verbose){
-        return "Name:\t\t\t" + this.name + "\nSpecies:\t\t" + this.species +
-                "\nBreed:\t\t\t" + this.breed + "\nColor:\t\t\t" + this.color + "\nDescription:\t" + this.description;
+        return "Name:\t\t\t" + this.name + "\nType:\t\t" + this.type.getName() +
+                "\nBreed:\t\t\t" + this.breed.getName() + "\nColor:\t\t\t" + this.color + "\nDescription:\t" + this.description;
+    }
+
+    @Override
+    // auto generated by IntelliJ
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Animal animal = (Animal) o;
+
+        if (!getName().equals(animal.getName())) return false;
+        if (!getType().equals(animal.getType())) return false;
+        if (!getBreed().equals(animal.getBreed())) return false;
+        if (!getDescription().equals(animal.getDescription())) return false;
+        return getColor().equals(animal.getColor());
+    }
+
+    @Override
+    // auto generated by IntelliJ
+    public int hashCode() {
+        int result = getName().hashCode();
+        result = 31 * result + getType().hashCode();
+        result = 31 * result + getBreed().hashCode();
+        result = 31 * result + getDescription().hashCode();
+        result = 31 * result + getColor().hashCode();
+        return result;
     }
 }

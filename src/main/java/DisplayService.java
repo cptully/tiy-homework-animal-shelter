@@ -1,8 +1,11 @@
 import com.theIronYard.Animal.Animal;
+import com.theIronYard.Animal.AnimalBreed;
 import com.theIronYard.Animal.AnimalService;
+import com.theIronYard.Animal.AnimalType;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,21 +16,12 @@ public class DisplayService {
     private InputStream in = System.in;
     private OutputStream out = System.out;
 
-    public InputStream getIn() {
-        return in;
-    }
+    public InputStream getIn() {return in;}
+    public void setIn(InputStream in) {this.in = in;}
 
-    public void setIn(InputStream in) {
-        this.in = in;
-    }
+    public OutputStream getOut() {return out;}
+    public void setOut(OutputStream out) {this.out = out;}
 
-    public OutputStream getOut() {
-        return out;
-    }
-
-    public void setOut(OutputStream out) {
-        this.out = out;
-    }
 
     public int promptForMainMenuSelection() {
 
@@ -45,7 +39,7 @@ public class DisplayService {
 
         //check for valid input
         if ((choice < 1) || (choice > 6)) {
-            System.out.println("\n\n\n\n\n\n\nPlease choose a number between 1 and 6");
+            System.out.println("\n\n\nPlease choose a number between 1 and 6");
             choice = promptForMainMenuSelection();
         }
 
@@ -62,49 +56,98 @@ public class DisplayService {
         return waitForYesNo("Are you sure you want to remove " + animalName + "from the shelter?\" (y/n)");
     }
 
-    private void displayAnimalList (AnimalService animals) {
-        ArrayList<String> animalList = animals.listAnimals();
-        int i = 1;
-        for (String animal: animalList) {
-            System.out.println(i++ + "\t" + animal);
+    private void displayAnimalList (AnimalService animals) throws SQLException {
+        ArrayList<Animal> animalList = animals.listAnimals();
+        for (Animal animal: animalList) {
+            System.out.println(animal.getId() + "\t" + animal.getName());
         }
     }
 
-    void displayAnimals(AnimalService animals){
+    void displayAnimals(AnimalService animals) throws SQLException {
         displayAnimalList(animals);
         promptForString("Press <enter> to continue...", false);
     }
 
-    void displayAnimal(AnimalService animals, int index) {
-        System.out.println(animals.getAnimal(index).toString("v"));
-        promptForString("Press <Enter> to continue", false);
+    void displayAnimal(AnimalService animals, int index) throws SQLException {
+        if (index >= 0) {
+            System.out.println(animals.getAnimal(index).toString("v"));
+            promptForString("Press <Enter> to continue", false);
+        } else {
+            System.out.println("No animal to display!");
+        }
     }
 
     // used in multiple places to interact with AnimalService
-    int promptForAnimalToView(AnimalService animals, String prompt) {
+    int promptForAnimalToView(AnimalService animals, String prompt) throws SQLException {
         displayAnimalList(animals);
         int choice = waitForInt("\n\nPlease enter the index of the animal you want to " + prompt + ". ");
+        if (!animals.contains(--choice)) {
+            System.out.println("That is not a valid animal ID!");
+            return -1;
+        }
         return --choice;
     }
 
-    Animal promptForNewAnimal() {
+    Animal promptForNewAnimal(ArrayList<String> types, ArrayList<String> breeds) {
         String name = promptForString("Name: ", true);
-        String species = promptForString("Species: ", true);
-        String breed = promptForString("Breed: ", true);
+        String prompt = "(";
+        for (String type: types) {
+            prompt = prompt + type + ", ";
+        }
+        prompt = prompt + ")";
+        String type = promptForString("Type" + prompt + ": ", true);
+        prompt = "(";
+        for (String breed: breeds) {
+            prompt = prompt + breed + ", ";
+        }
+        prompt = prompt + ")";
+        String breed = promptForString("Breed" + prompt + ": ", true);
         String color = promptForString("Color: ", true);
         String description = promptForString("Description: ", true);
 
-        return new Animal(name, species, breed, color, description);
+        AnimalType animalType = null;
+        if (!types.contains(type)) {
+            types.add(type);
+        }
+        animalType = new AnimalType(type);
+        AnimalBreed animalBreed = null;
+        if (!breeds.contains(breed)) {
+            breeds.add(breed);
+        }
+        animalBreed = new AnimalBreed(breed);
+        return new Animal(name, animalType, animalBreed, color, description);
     }
 
-    Animal promptForNewAnimalData(Animal animal) {
+    Animal promptForNewAnimalData(Animal animal, ArrayList<String> types, ArrayList<String> breeds) {
         String name = promptForString("Name (" + animal.getName() + "): ", false);
-        String species = promptForString("Species (" + animal.getSpecies() + "): ", false);
-        String breed = promptForString("Breed: (" + animal.getBreed() + "): ", false);
+        String prompt = "(";
+        for (String type: types) {
+            prompt = prompt + type + ", ";
+        }
+        prompt = prompt + ")";
+        String type = promptForString("Type (" + animal.getType() + "[" + prompt + "]): ", false);
+        prompt = "(";
+        for (String breed: breeds) {
+            prompt = prompt + breed + ", ";
+        }
+        prompt = prompt + ")";
+        String breed = promptForString("Breed: (" + animal.getBreed() + "[" + prompt + "]): ", false);
         String color = promptForString("Color: (" + animal.getColor() + "): ", false);
         String description = promptForString("Description: (" + animal.getDescription() + "): ", false);
 
-        return new Animal(name, species, breed, color, description);
+        AnimalType animalType = null;
+        if (types.contains(type)) {animalType = new AnimalType(-1, type);}
+        AnimalBreed animalBreed = null;
+        if (breeds.contains(breed)) {animalBreed = new AnimalBreed(-1, breed);}
+        return new Animal(name, animalType, animalBreed, color, description);
+    }
+
+    Animal promptForNewNote(Animal animal) {
+        String note = promptForString("Please enter a note for " + animal.getName() + ":", false);
+        if (!note.isEmpty()) {
+            animal.addNote(note);
+        }
+        return animal;
     }
 
     private String promptForString(String message, boolean required) {

@@ -1,138 +1,152 @@
 package com.theIronYard.Animal;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 /**
  * Created by chris on 8/20/16.
  */
 public class AnimalRepository {
     // properties
-    private ArrayList<Animal> animalList = new ArrayList<>(10);
-    private Path path = Paths.get("./animalDatabase.json");
+    private Connection connection;
+    private String jdbcUrl = "jdbc:postgresql://localhost/animalrepository_test";
 
-    private static final boolean USE_DEMO_DATA = false;
 
     // constructor
-    public AnimalRepository() {
-
-        //load test data
-        if (USE_DEMO_DATA) {
-            //AnimalService animals = new AnimalService();
-            animalList.add(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
-            animalList.add(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
-            animalList.add(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
-        } else {
-            readDB();
+    public AnimalRepository(String jdbcUrl) throws SQLException {
+        if (!jdbcUrl.equals("")) {
+            this.jdbcUrl = jdbcUrl;
         }
+        this.connection = DriverManager.getConnection(this.jdbcUrl);
+        readDB();
     }
 
-    public Path getPath() {
-        return path;
+    // private methods
+
+    private ResultSet readDB() {
+        return null;
     }
 
-    public void setPath(Path path) {
-        if ((path != null) && (!path.toString().equals(""))) this.path = path;
+    ResultSet getValidAnimalTypes() throws SQLException {
+        Statement statement = connection.createStatement();
+        return statement.executeQuery("SELECT type FROM type");
+    }
+
+    ResultSet getValidAnimalBreeds() throws SQLException {
+        Statement statement = connection.createStatement();
+        return statement.executeQuery("SELECT breed FROM breed");
     }
 
     // methods used by other Animal Service
-    Animal get(int index) {
-        return animalList.get(index);
+    ResultSet get(int id) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT a.id, a.name, t.typeid, t.type, b.breedid, b.breed, a.color, a.description " +
+                        "FROM animal AS a " +
+                        "JOIN type AS t " +
+                        "ON a.typeid = t.typeid " +
+                        "JOIN breed AS b " +
+                        "ON a.breedid = b.breedid " +
+                        "WHERE a.id = ?");
+
+        preparedStatement.setInt(1, id);
+
+        return preparedStatement.executeQuery();
     }
 
-    boolean add(Animal animal) {
-        boolean newAnimal =  animalList.add(animal);
-        writeDB();
-        return newAnimal;
-    }
+    Animal add(Animal animal) throws SQLException {
+        PreparedStatement preparedStatement = connection.
+                prepareStatement("INSERT INTO animal (name, typeid, breedid, color, description) " +
+                        "VALUES (?, ?, ?, ?, ?) RETURNING id");
 
-    int size() { return animalList.size(); }
+        preparedStatement.setString(1, animal.getName());
+        preparedStatement.setInt(2, animal.getType().getId());
+        preparedStatement.setInt(3, animal.getBreed().getId());
+        preparedStatement.setString(4, animal.getColor());
+        preparedStatement.setString(5, animal.getDescription());
 
-    Animal remove(int index) {
-        if ((index >= 0) && (index < animalList.size())) {
-            Animal newAnimal = animalList.remove(index);
-            writeDB();
-            return newAnimal;
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            animal.setId(resultSet.getInt("id"));
         }
-        return new Animal();
+
+        return animal;
     }
 
-    boolean contains(int index) {
-        if ((index > 0) && (index < animalList.size())) {
-            return animalList.contains(animalList.get(index));
+    void remove(int id) throws SQLException {
+        PreparedStatement preparedStatement =
+                connection.prepareStatement("DELETE FROM animal WHERE id=?");
+
+        preparedStatement.setInt(1, id);
+        preparedStatement.execute();
+
+        //return new Animal();
+    }
+
+    boolean contains(int id) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT count(1) FROM animal WHERE id = ?");
+        preparedStatement.setInt(1, id);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            return resultSet.getInt(1) == 1;
         }
         return false;
     }
 
-    boolean contains(Animal animal) { return animalList.contains(animal); }
+    boolean contains(Animal animal) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT count(1) FROM animal WHERE id = ?");
+        preparedStatement.setInt(1, animal.getId());
 
-//    int size() {return animalList.size();}
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-    ArrayList<String> list() {
-        ArrayList<String> animalListString = new ArrayList<>();
-
-        ListIterator it =  animalList.listIterator();
-
-        while (it.hasNext())
-            animalListString.add(it.next().toString());
-
-        return animalListString;
-    }
-
-    public void editAnimal(int index, String name, String species, String breed, String color, String description) {
-        Animal currentAnimal = animalList.get(index);
-
-        //currentAnimal.setName(name);
-        currentAnimal.setSpecies(species);
-        currentAnimal.setBreed(breed);
-        currentAnimal.setColor(color);
-        currentAnimal.setDescription(description);
-
-        writeDB();
-    }
-
-    public void editAnimal(Animal animal, int index) {
-        // if (! animal.name.isEmpty()) {animalList.get(index).name = animal.name;}
-        if (! animal.getSpecies().isEmpty()) {animalList.get(index).setSpecies(animal.getSpecies());}
-        if (! animal.getBreed().isEmpty()) {animalList.get(index).setBreed(animal.getBreed());}
-        if (! animal.getColor().isEmpty()) {animalList.get(index).setColor(animal.getColor());}
-        if (! animal.getDescription().isEmpty()) {animalList.get(index).setDescription(animal.getDescription());}
-
-        writeDB();
-    }
-
-    // persistence methods
-    private void writeDB(){
-        // Write out the animalList as a json file
-        ArrayList<String> json = new ArrayList<>();
-        json.add(new Gson().toJson(animalList));
-        try {
-            Files.write(path, json);
-        } catch(IOException ex) {
-            System.out.println("error writing file");
+        while (resultSet.next()) {
+            return resultSet.getInt(1) == 1;
         }
+        return false;
     }
 
-    private void readDB() {
-        try {
-            String json = new String(Files.readAllBytes(path));
-
-            // this describes the structure of data in the JSON string. Note the generics
-            Type listType = new TypeToken<ArrayList<Animal>>(){}.getType();
-
-            // convert the JSON back to a map of arrays of recipes
-            animalList = new Gson().fromJson(json, listType);
-
-        } catch(IOException ex) {
-            System.out.println("error writing file");
-        }
-
+    ResultSet list() throws SQLException {
+        Statement statement = connection.createStatement();
+        return statement.executeQuery("SELECT a.id, a.name, a.typeid, t.type, a.breedid, b.breed, a.color, a.description " +
+                "FROM animal AS a " +
+                "JOIN type AS t " +
+                "ON t.typeid = a.typeid " +
+                "JOIN breed AS b " +
+                "ON b.breedid = a.breedid");
     }
+
+    void editAnimal(Animal animal) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("UPDATE animal " +
+                        "SET name = ?, " +
+                        "color = ?, " +
+                        "description = ?, " +
+                        "typeid = ?, " +
+                        "breedid = ? " +
+                        "WHERE id = ?;");
+
+        preparedStatement.setString(1, animal.getName());
+        preparedStatement.setString(2, animal.getColor());
+        preparedStatement.setString(3, animal.getDescription());
+        preparedStatement.setInt(4, animal.getType().getId());
+        preparedStatement.setInt(5, animal.getBreed().getId());
+        preparedStatement.setInt(6, animal.getId());
+
+        preparedStatement.execute();
+    }
+
+    public int size() throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT count(id) FROM animal");
+
+        resultSet.next();
+        return resultSet.getInt("count");
+    }
+
 }
+
+

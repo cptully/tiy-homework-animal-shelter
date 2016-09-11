@@ -135,7 +135,7 @@ public class DisplayServiceTest {
         };
     }
 
-    /*@Test
+    /* @Test
     public void promptForNewAnimalDataTest() throws Exception {
         // arrange
         String name = "myst";

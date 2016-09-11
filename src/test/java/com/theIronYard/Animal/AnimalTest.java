@@ -45,23 +45,25 @@ public class AnimalTest {
     @Test
     public void animalSetSpeciesTest() {
         // arrange
+        AnimalType animalType = new AnimalType(-1, "canine");
 
         // act
-        newAnimal.setSpecies("canine");
+        newAnimal.setType(animalType);
 
         // assert
-        assertThat(newAnimal.getSpecies(), is("canine"));
+        assertThat(newAnimal.getType().getName(), is("canine"));
     }
 
     @Test
     public void animalSetBreedTest() {
         // arrange
+        AnimalBreed animalBreed = new AnimalBreed(-1, "border collie");
 
         // act
-        newAnimal.setBreed("border collie");
+        newAnimal.setBreed(animalBreed);
 
         // assert
-        assertThat(newAnimal.getBreed(), is("border collie"));
+        assertThat(newAnimal.getBreed().getName(), is("border collie"));
     }
 
     @Test
@@ -99,7 +101,9 @@ public class AnimalTest {
     @Test
     public void animalToStringTest() {
         // arrange
-        newAnimal = new Animal("myst", "feline", "calico", "grey", "description");
+        AnimalType animalType = new AnimalType(-1, "feline");
+        AnimalBreed animalBreed = new AnimalBreed(-1, "calico");
+        newAnimal = new Animal("myst", animalType, animalBreed, "grey", "description");
 
         // act
         String result = newAnimal.toString();
@@ -111,13 +115,14 @@ public class AnimalTest {
     @Test
     public void animalToStringVerboseTest() {
         // arrange
-        newAnimal = new Animal("myst", "feline", "calico", "grey", "description");
+        AnimalType animalType = new AnimalType(-1, "feline");
+        AnimalBreed animalBreed = new AnimalBreed(-1, "calico");
+        newAnimal = new Animal("myst", animalType, animalBreed, "grey", "description");
 
         // act
         String result = newAnimal.toString("v");
 
         // assert
-        assertThat(result, is("Name:\t\t\tmyst\nSpecies:\t\tfeline\nBreed:\t\t\tcalico\nColor:\t\t\tgrey\nDescription:\tdescription"));
+        assertThat(result, is("Name:\t\t\tmyst\nType:\t\tfeline\nBreed:\t\t\tcalico\nColor:\t\t\tgrey\nDescription:\tdescription"));
     }
-
 }
