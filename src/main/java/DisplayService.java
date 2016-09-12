@@ -81,65 +81,140 @@ public class DisplayService {
     int promptForAnimalToView(AnimalService animals, String prompt) throws SQLException {
         displayAnimalList(animals);
         int choice = waitForInt("\n\nPlease enter the index of the animal you want to " + prompt + ". ");
-        if (!animals.contains(--choice)) {
+        if (!animals.contains(choice)) {
             System.out.println("That is not a valid animal ID!");
             return -1;
         }
-        return --choice;
+        return choice;
     }
 
-    Animal promptForNewAnimal(ArrayList<String> types, ArrayList<String> breeds) {
+    Animal promptForNewAnimal(ArrayList<AnimalType> types, ArrayList<AnimalBreed> breeds) {
+        // name
         String name = promptForString("Name: ", true);
+
+        // type
         String prompt = "(";
-        for (String type: types) {
-            prompt = prompt + type + ", ";
+        for (AnimalType type: types) {
+            prompt = prompt + type.getName() + ", ";
         }
         prompt = prompt + ")";
-        String type = promptForString("Type" + prompt + ": ", true);
+        String type = "";
+        while (!containsType(types, type)) {
+            type = promptForString("Type" + prompt + ": ", true);
+        }
+
+        // breed
         prompt = "(";
-        for (String breed: breeds) {
-            prompt = prompt + breed + ", ";
+        for (AnimalBreed breed: breeds) {
+            prompt = prompt + breed.getName() + ", ";
         }
         prompt = prompt + ")";
-        String breed = promptForString("Breed" + prompt + ": ", true);
+        String breed = "";
+        while (!containsBreed(breeds, breed)) {
+            breed =  promptForString("Breed: ([" + prompt + "]): ", false);
+        }
+
+        // color
         String color = promptForString("Color: ", true);
+
+        // description
         String description = promptForString("Description: ", true);
 
-        AnimalType animalType = null;
-        if (!types.contains(type)) {
-            types.add(type);
+        AnimalType animalType = new AnimalType(type);
+        for(AnimalType t : types) {
+            if(t.getName().equals(type)) {
+                animalType.setId(t.getId());
+                break;
+            }
         }
-        animalType = new AnimalType(type);
-        AnimalBreed animalBreed = null;
-        if (!breeds.contains(breed)) {
-            breeds.add(breed);
+
+        AnimalBreed animalBreed = new AnimalBreed(breed);
+        for (AnimalBreed b : breeds) {
+            if (b.getName().equals(breed)) {
+                animalBreed.setId(b.getId());
+                break;
+            }
         }
-        animalBreed = new AnimalBreed(breed);
         return new Animal(name, animalType, animalBreed, color, description);
     }
 
-    Animal promptForNewAnimalData(Animal animal, ArrayList<String> types, ArrayList<String> breeds) {
+    private boolean containsType(ArrayList<AnimalType> types, String newType) {
+        for(AnimalType type : types) {
+            if(type != null && type.getName().equals(newType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean containsBreed(ArrayList<AnimalBreed> breeds, String newBreed) {
+        for(AnimalBreed breed : breeds) {
+            if(breed != null && breed.getName().equals(newBreed)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Animal promptForNewAnimalData(Animal animal, ArrayList<AnimalType> types, ArrayList<AnimalBreed> breeds) {
+        // name
         String name = promptForString("Name (" + animal.getName() + "): ", false);
+        if (name.equals("")) name = animal.getName();
+
+        // type
         String prompt = "(";
-        for (String type: types) {
-            prompt = prompt + type + ", ";
+        for (AnimalType type: types) {
+            prompt = prompt + type.getName() + ", ";
         }
         prompt = prompt + ")";
-        String type = promptForString("Type (" + animal.getType() + "[" + prompt + "]): ", false);
+        String type = "";
+
+        while (!containsType(types, type)) {
+            type = promptForString("Type (" + animal.getType().getName() + "[" + prompt + "]): ", false);
+            if (type.equals("")) {
+                type = animal.getType().getName();
+                break;
+            }
+        }
+
+        // breed
         prompt = "(";
-        for (String breed: breeds) {
+        for (AnimalBreed breed: breeds) {
             prompt = prompt + breed + ", ";
         }
         prompt = prompt + ")";
-        String breed = promptForString("Breed: (" + animal.getBreed() + "[" + prompt + "]): ", false);
-        String color = promptForString("Color: (" + animal.getColor() + "): ", false);
-        String description = promptForString("Description: (" + animal.getDescription() + "): ", false);
+        String breed = "";
+        while (!containsBreed(breeds, breed)) {
+            breed =  promptForString("Breed: (" + animal.getBreed().getName() + "[" + prompt + "]): ", false);
+            if (breed.equals("")) {
+                breed = animal.getBreed().getName();
+                break;
+            }
+        }
 
-        AnimalType animalType = null;
-        if (types.contains(type)) {animalType = new AnimalType(-1, type);}
-        AnimalBreed animalBreed = null;
-        if (breeds.contains(breed)) {animalBreed = new AnimalBreed(-1, breed);}
-        return new Animal(name, animalType, animalBreed, color, description);
+        // color
+        String color = promptForString("Color: (" + animal.getColor() + "): ", false);
+        if (color.equals("")) color = animal.getColor();
+
+        // description
+        String description = promptForString("Description: (" + animal.getDescription() + "): ", false);
+        if (description.equals("")) description = animal.getDescription();
+
+        AnimalType animalType = new AnimalType(type);
+        for(AnimalType t : types) {
+            if(t.getName().equals(type)) {
+                animalType.setId(t.getId());
+                break;
+            }
+        }
+
+        AnimalBreed animalBreed = new AnimalBreed(breed);
+        for (AnimalBreed b : breeds) {
+            if (b.getName().equals(breed)) {
+                animalBreed.setId(b.getId());
+            }
+        }
+        return new Animal(animal.getId(), name, animalType, animalBreed, color, description);
     }
 
     Animal promptForNewNote(Animal animal) {

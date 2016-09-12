@@ -2,25 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3db38385-af80-4b1d-b4f3-2df1ae504bf5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Database illustration.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/database Illustration.uml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/animalrepository.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalBreed.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/Note.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/NoteRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/DisplayService.java" afterPath="$PROJECT_DIR$/src/main/java/DisplayService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MenuService.java" afterPath="$PROJECT_DIR$/src/main/java/MenuService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/Animal.java" afterPath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/Animal.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalBreedRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalBreedRepository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalRepository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalService.java" afterPath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalTypeRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalTypeRepository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/DisplayServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/DisplayServiceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/theIronYard/Animal/AnimalRepositoryTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/theIronYard/Animal/AnimalRepositoryTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/theIronYard/Animal/AnimalTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/theIronYard/Animal/AnimalTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tiy-homework-animal-shelter-2.iml" afterPath="$PROJECT_DIR$/tiy-homework-animal-shelter-2.iml" />
     </list>
     <ignored path="tiy-homework-animal-shelter-2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,114 +62,6 @@
         <option name="myItemId" />
         <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
       </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="PostgreSQL - animalrepository_test@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="note" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="PostgreSQL - animalrepository_test@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="animal" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="PostgreSQL - animalrepository@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="PostgreSQL - animalrepository@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="type" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="PostgreSQL - animalrepository@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="note" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="PostgreSQL - animalrepository@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="breed" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="PostgreSQL - animalrepository@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
-      </PATH_ELEMENT>
     </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
@@ -189,11 +70,117 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Animal.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/Animal.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="48" column="15" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimalService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="163" column="28" selection-start-line="163" selection-start-column="28" selection-end-line="163" selection-end-column="28" />
+              <folding>
+                <element signature="docComment;method#AnimalService#0;class#AnimalService#0" expanded="false" />
+                <element signature="docComment;method#listAnimals#0;class#AnimalService#0" expanded="false" />
+                <element signature="docComment;method#getAnimal#0;class#AnimalService#0" expanded="false" />
+                <element signature="docComment;method#editAnimal#0;class#AnimalService#0" expanded="false" />
+                <element signature="docComment;method#removeAnimal#0;class#AnimalService#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimalBreedRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalBreedRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="23" column="59" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <marker date="1473703512000" expanded="true" signature="808:827" ph="SELECT * FRO... breed" />
+                <marker date="1473703512000" expanded="true" signature="808:844" ph="SELECT * FRO... breed" />
+                <marker date="1473703512000" expanded="true" signature="1135:1251" ph="INSERT INTO breed... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimalRepository.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1454">
+              <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+              <folding>
+                <marker date="1473706797000" expanded="true" signature="744:866" ph="SELECT a.id,... animal" />
+                <marker date="1473706797000" expanded="true" signature="744:1110" ph="SELECT a.id,... animal" />
+                <marker date="1473706797000" expanded="true" signature="1357:1419" ph="INSERT INTO animal... " />
+                <marker date="1473706797000" expanded="true" signature="1357:1471" ph="INSERT INTO animal... " />
+                <marker date="1473706797000" expanded="true" signature="1357:1484" ph="INSERT INTO animal... " />
+                <marker date="1473706797000" expanded="true" signature="2127:2156" ph="DELETE FROM " />
+                <marker date="1473706797000" expanded="true" signature="2421:2461" ph="SELECT count... animal" />
+                <marker date="1473706797000" expanded="true" signature="2841:2881" ph="SELECT count... animal" />
+                <marker date="1473706797000" expanded="true" signature="3265:3547" ph="SELECT a.id,... animal" />
+                <marker date="1473706797000" expanded="true" signature="3265:3582" ph="SELECT a.id,... animal" />
+                <marker date="1473706797000" expanded="true" signature="3265:3584" ph="SELECT a.id,... animal" />
+                <marker date="1473706797000" expanded="true" signature="3742:3756" ph="UPDATE anima... " />
+                <marker date="1473706797000" expanded="true" signature="3742:3798" ph="UPDATE anima... " />
+                <marker date="1473706797000" expanded="true" signature="3742:3838" ph="UPDATE anima... " />
+                <marker date="1473706797000" expanded="true" signature="3742:3883" ph="UPDATE anima... " />
+                <marker date="1473706797000" expanded="true" signature="3742:3925" ph="UPDATE anima... " />
+                <marker date="1473706797000" expanded="true" signature="3742:3966" ph="UPDATE anima... " />
+                <marker date="1473706797000" expanded="true" signature="3742:4008" ph="UPDATE anima... " />
+                <marker date="1473706797000" expanded="true" signature="4579:4607" ph="SELECT count... animal" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimalTypeRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalTypeRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="239">
+              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <marker date="1473703512000" expanded="true" signature="770:788" ph="SELECT * FRO... type" />
+                <marker date="1473703512000" expanded="true" signature="770:804" ph="SELECT * FRO... type" />
+                <marker date="1473703512000" expanded="true" signature="1055:1168" ph="INSERT INTO type... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MenuService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/MenuService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="70" column="30" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DisplayService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/DisplayService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="102" column="9" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="35">
-              <caret line="15" column="81" selection-start-line="15" selection-start-column="81" selection-end-line="15" selection-end-column="81" />
+            <state relative-caret-position="260">
+              <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -219,17 +206,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/Animal.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/2e29d16d-26ea-45a0-b7bf-6192831e5fb9/console.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DisplayService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalBreedRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalTypeRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/NoteRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/NoteService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalService.java" />
         <option value="$PROJECT_DIR$/src/main/java/MenuService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/Animal.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/test/java/DisplayServiceTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/DisplayService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalRepository.java" />
       </list>
     </option>
   </component>
@@ -357,6 +344,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Animal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tiy-homework-animal-shelter-2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tiy-homework-animal-shelter-2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -458,6 +471,7 @@
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/SQL Dialects" value="PostgreSQL" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -466,7 +480,7 @@
       <recent name="$PROJECT_DIR$/src/test/java" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in tiy-homework-animal-shelter-2">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="All in tiy-homework-animal-shelter-2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="tiy-homework-animal-shelter-2" />
@@ -1029,8 +1043,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.All in tiy-homework-animal-shelter-2" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.All in tiy-homework-animal-shelter-2" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.AnimalTest.animalToStringVerboseTest" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.AnimalTest.animalToStringTest" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.AnimalTest" />
@@ -1056,7 +1070,7 @@
       <workItem from="1472939920122" duration="43043000" />
       <workItem from="1473272981634" duration="30687000" />
       <workItem from="1473470824909" duration="268000" />
-      <workItem from="1473471451607" duration="12031000" />
+      <workItem from="1473471451607" duration="25115000" />
     </task>
     <servers />
   </component>
@@ -1093,7 +1107,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101149000" />
+    <option name="totallyTimeSpent" value="114233000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="728" extended-state="6" />
@@ -1107,7 +1121,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32861635" sideWeight="0.503231" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="REPL" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32861635" sideWeight="0.49676898" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32861635" sideWeight="0.49676898" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Leiningen" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32861635" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1172,7 +1186,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="27" />
+      <option name="time" value="36" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1181,102 +1195,71 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalBreedRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="58" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1473563961000" expanded="true" signature="808:827" ph="SELECT * FRO... breed" />
-            <marker date="1473563961000" expanded="true" signature="1118:1234" ph="INSERT INTO breed... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MenuService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+        <state relative-caret-position="180">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalType.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/Animal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#279#280#0" expanded="true" />
-            <element signature="e#311#312#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="243">
+          <caret line="48" column="15" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalTypeRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalBreedRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        <state relative-caret-position="262">
+          <caret line="23" column="59" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1473563961000" expanded="true" signature="770:788" ph="SELECT * FRO... type" />
-            <marker date="1473563961000" expanded="true" signature="1039:1152" ph="INSERT INTO type... " />
+            <marker date="1473703512000" expanded="true" signature="808:827" ph="SELECT * FRO... breed" />
+            <marker date="1473703512000" expanded="true" signature="808:844" ph="SELECT * FRO... breed" />
+            <marker date="1473703512000" expanded="true" signature="1135:1251" ph="INSERT INTO breed... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/DisplayServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1920">
-          <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-          <folding>
-            <marker date="1473589045000" expanded="true" signature="792:813" ph="SELECT type type" />
-            <marker date="1473589045000" expanded="true" signature="982:1005" ph="SELECT breed... breed" />
-            <marker date="1473589045000" expanded="true" signature="1200:1322" ph="SELECT a.id,... animal" />
-            <marker date="1473589045000" expanded="true" signature="1200:1566" ph="SELECT a.id,... animal" />
-            <marker date="1473589045000" expanded="true" signature="1813:1875" ph="INSERT INTO animal... " />
-            <marker date="1473589045000" expanded="true" signature="1813:1927" ph="INSERT INTO animal... " />
-            <marker date="1473589045000" expanded="true" signature="1813:1940" ph="INSERT INTO animal... " />
-            <marker date="1473589045000" expanded="true" signature="2583:2612" ph="DELETE FROM " />
-            <marker date="1473589045000" expanded="true" signature="2877:2917" ph="SELECT count... animal" />
-            <marker date="1473589045000" expanded="true" signature="3297:3337" ph="SELECT count... animal" />
-            <marker date="1473589045000" expanded="true" signature="3721:3835" ph="SELECT id, n... animal" />
-            <marker date="1473589045000" expanded="true" signature="3721:3840" ph="SELECT a.id,... animal" />
-            <marker date="1473589045000" expanded="true" signature="3721:3876" ph="SELECT a.id,... animal" />
-            <marker date="1473589045000" expanded="true" signature="3721:3920" ph="SELECT a.id,... animal" />
-            <marker date="1473589045000" expanded="true" signature="3721:3957" ph="SELECT a.id,... animal" />
-            <marker date="1473589045000" expanded="true" signature="3721:4003" ph="SELECT a.id,... animal" />
-            <marker date="1473589045000" expanded="true" signature="4163:4177" ph="UPDATE anima... " />
-            <marker date="1473589045000" expanded="true" signature="4163:4219" ph="UPDATE anima... " />
-            <marker date="1473589045000" expanded="true" signature="4163:4259" ph="UPDATE anima... " />
-            <marker date="1473589045000" expanded="true" signature="4163:4304" ph="UPDATE anima... " />
-            <marker date="1473589045000" expanded="true" signature="4163:4346" ph="UPDATE anima... " />
-            <marker date="1473589045000" expanded="true" signature="4163:4387" ph="UPDATE anima... " />
-            <marker date="1473589045000" expanded="true" signature="4163:4429" ph="UPDATE anima... " />
-            <marker date="1473589045000" expanded="true" signature="5000:5028" ph="SELECT count... animal" />
-          </folding>
+        <state relative-caret-position="885">
+          <caret line="181" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/Note.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        <state relative-caret-position="260">
+          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DisplayService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-795">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="150">
+          <caret line="102" column="9" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MenuService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="70" column="30" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-120">
-          <caret line="101" column="18" selection-start-line="101" selection-start-column="18" selection-end-line="101" selection-end-column="18" />
+        <state relative-caret-position="140">
+          <caret line="163" column="28" selection-start-line="163" selection-start-column="28" selection-end-line="163" selection-end-column="28" />
           <folding>
             <element signature="docComment;method#AnimalService#0;class#AnimalService#0" expanded="false" />
             <element signature="docComment;method#listAnimals#0;class#AnimalService#0" expanded="false" />
@@ -1287,27 +1270,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/Animal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
+    <entry file="dbDummy://dbtable:/ffbb986/2e29d16d-26ea-45a0-b7bf-6192831e5fb9/animalrepository_test.public.animal">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/NoteService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="7" selection-start-line="8" selection-start-column="3" selection-end-line="16" selection-end-column="7" />
-          <folding />
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalTypeRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="15" column="81" selection-start-line="15" selection-start-column="81" selection-end-line="15" selection-end-column="81" />
-          <folding />
+        <state relative-caret-position="239">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1473703512000" expanded="true" signature="770:788" ph="SELECT * FRO... type" />
+            <marker date="1473703512000" expanded="true" signature="770:804" ph="SELECT * FRO... type" />
+            <marker date="1473703512000" expanded="true" signature="1055:1168" ph="INSERT INTO type... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/theIronYard/Animal/AnimalRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1454">
+          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+          <folding>
+            <marker date="1473706797000" expanded="true" signature="744:866" ph="SELECT a.id,... animal" />
+            <marker date="1473706797000" expanded="true" signature="744:1110" ph="SELECT a.id,... animal" />
+            <marker date="1473706797000" expanded="true" signature="1357:1419" ph="INSERT INTO animal... " />
+            <marker date="1473706797000" expanded="true" signature="1357:1471" ph="INSERT INTO animal... " />
+            <marker date="1473706797000" expanded="true" signature="1357:1484" ph="INSERT INTO animal... " />
+            <marker date="1473706797000" expanded="true" signature="2127:2156" ph="DELETE FROM " />
+            <marker date="1473706797000" expanded="true" signature="2421:2461" ph="SELECT count... animal" />
+            <marker date="1473706797000" expanded="true" signature="2841:2881" ph="SELECT count... animal" />
+            <marker date="1473706797000" expanded="true" signature="3265:3547" ph="SELECT a.id,... animal" />
+            <marker date="1473706797000" expanded="true" signature="3265:3582" ph="SELECT a.id,... animal" />
+            <marker date="1473706797000" expanded="true" signature="3265:3584" ph="SELECT a.id,... animal" />
+            <marker date="1473706797000" expanded="true" signature="3742:3756" ph="UPDATE anima... " />
+            <marker date="1473706797000" expanded="true" signature="3742:3798" ph="UPDATE anima... " />
+            <marker date="1473706797000" expanded="true" signature="3742:3838" ph="UPDATE anima... " />
+            <marker date="1473706797000" expanded="true" signature="3742:3883" ph="UPDATE anima... " />
+            <marker date="1473706797000" expanded="true" signature="3742:3925" ph="UPDATE anima... " />
+            <marker date="1473706797000" expanded="true" signature="3742:3966" ph="UPDATE anima... " />
+            <marker date="1473706797000" expanded="true" signature="3742:4008" ph="UPDATE anima... " />
+            <marker date="1473706797000" expanded="true" signature="4579:4607" ph="SELECT count... animal" />
+          </folding>
         </state>
       </provider>
     </entry>

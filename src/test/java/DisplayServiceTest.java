@@ -135,7 +135,8 @@ public class DisplayServiceTest {
         };
     }
 
-    /* @Test
+/*
+    @Test
     public void promptForNewAnimalDataTest() throws Exception {
         // arrange
         String name = "myst";
@@ -176,7 +177,8 @@ public class DisplayServiceTest {
         // assert
         assertThat(result, equalTo(expectedResult));
 
-    }*/
+    }
 
+*/
 
 }

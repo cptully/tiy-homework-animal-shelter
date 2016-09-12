@@ -1,5 +1,7 @@
+import com.theIronYard.Animal.AnimalBreed;
 import com.theIronYard.Animal.AnimalService;
 import com.theIronYard.Animal.Animal;
+import com.theIronYard.Animal.AnimalType;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,8 +39,8 @@ class MenuService {
     }
 
     void addAnimal() throws SQLException {
-        ArrayList<String> types = animalService.getValidAnimalTypes();
-        ArrayList<String> breeds = animalService.getValidAnimalBreeds();
+        ArrayList<AnimalType> types = animalService.getValidAnimalTypes();
+        ArrayList<AnimalBreed> breeds = animalService.getValidAnimalBreeds();
         Animal newAnimal = displayService.promptForNewAnimal(types, breeds);
         animalService.addAnimal(newAnimal);
     }
@@ -55,8 +57,8 @@ class MenuService {
 
     void editAnimal() throws SQLException {
         int choice = displayService.promptForAnimalToView(animalService, "edit");
-        ArrayList<String> types = animalService.getValidAnimalTypes();
-        ArrayList<String> breeds = animalService.getValidAnimalBreeds();
+        ArrayList<AnimalType> types = animalService.getValidAnimalTypes();
+        ArrayList<AnimalBreed> breeds = animalService.getValidAnimalBreeds();
         Animal newData = displayService.promptForNewAnimalData(animalService.getAnimal(choice), types, breeds);
         animalService.editAnimal(newData);
     }

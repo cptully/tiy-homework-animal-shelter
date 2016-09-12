@@ -30,23 +30,23 @@ public class AnimalService {
     }
 
 
-    public ArrayList<String> getValidAnimalTypes() throws SQLException {
+    public ArrayList<AnimalType> getValidAnimalTypes() throws SQLException {
         ResultSet resultSet = animalTypeRepository.getAnimalTypes();
 
-        ArrayList<String> types = new ArrayList<>();
+        ArrayList<AnimalType> types = new ArrayList<>();
         while (resultSet.next()) {
-            types.add(resultSet.getString("type"));
+            types.add(new AnimalType(resultSet.getInt("typeid"), resultSet.getString("type")));
         }
 
         return types;
     }
 
-    public ArrayList<String> getValidAnimalBreeds() throws SQLException {
+    public ArrayList<AnimalBreed> getValidAnimalBreeds() throws SQLException {
         ResultSet resultSet = animalBreedRepository.getAnimalBreeds();
 
-        ArrayList<String> breeds = new ArrayList<>();
+        ArrayList<AnimalBreed> breeds = new ArrayList<>();
         while (resultSet.next()) {
-            breeds.add(resultSet.getString("breed"));
+            breeds.add(new AnimalBreed(resultSet.getInt("breedid"), resultSet.getString("breed")));
         }
         return breeds;
     }
@@ -64,6 +64,7 @@ public class AnimalService {
             AnimalType type = new AnimalType(resultSet.getInt("typeid"), resultSet.getString("type"));
             AnimalBreed breed = new AnimalBreed(resultSet.getInt("breedid"), resultSet.getString("breed"));
             Animal animal = new Animal(
+                    resultSet.getInt("id"),
                     resultSet.getString("name"),
                     type,
                     breed,
@@ -76,6 +77,18 @@ public class AnimalService {
         }
 
         return animals;
+    }
+
+    public ArrayList<AnimalType> listTypes() throws SQLException {
+        ResultSet resultSet = animalTypeRepository.getAnimalTypes();
+
+        ArrayList<AnimalType> types = new ArrayList<>();
+        while (resultSet.next()) {
+            AnimalType type = new AnimalType(resultSet.getInt("typeid"), resultSet.getString("type"));
+            types.add(type);
+        }
+
+        return types;
     }
 
     public ArrayList<Note> listNotes(int id) throws SQLException {
@@ -129,6 +142,8 @@ public class AnimalService {
      */
     public void addAnimal(Animal newAnimal) throws SQLException {
         animalRepository.add(newAnimal);
+        ResultSet resultSet =  animalTypeRepository.getAnimalTypes();
+
     }
 
     /**
@@ -150,8 +165,8 @@ public class AnimalService {
 
     public boolean contains(Animal animal) throws SQLException { return animalRepository.contains(animal.getId()); }
 
-    public boolean contains(int index) throws SQLException {
-        return animalRepository.contains(index);
+    public boolean contains(int id) throws SQLException {
+        return animalRepository.contains(id);
     }
 
     public int size() throws SQLException {return animalRepository.size();}

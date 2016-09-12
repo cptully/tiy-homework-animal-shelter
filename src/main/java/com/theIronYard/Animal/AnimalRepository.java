@@ -18,25 +18,10 @@ public class AnimalRepository {
             this.jdbcUrl = jdbcUrl;
         }
         this.connection = DriverManager.getConnection(this.jdbcUrl);
-        readDB();
     }
 
     // private methods
-
-    private ResultSet readDB() {
-        return null;
-    }
-
-    ResultSet getValidAnimalTypes() throws SQLException {
-        Statement statement = connection.createStatement();
-        return statement.executeQuery("SELECT type FROM type");
-    }
-
-    ResultSet getValidAnimalBreeds() throws SQLException {
-        Statement statement = connection.createStatement();
-        return statement.executeQuery("SELECT breed FROM breed");
-    }
-
+    
     // methods used by other Animal Service
     ResultSet get(int id) throws SQLException {
         PreparedStatement preparedStatement = connection
@@ -116,7 +101,8 @@ public class AnimalRepository {
                 "JOIN type AS t " +
                 "ON t.typeid = a.typeid " +
                 "JOIN breed AS b " +
-                "ON b.breedid = a.breedid");
+                "ON b.breedid = a.breedid " +
+                "ORDER BY a.id");
     }
 
     void editAnimal(Animal animal) throws SQLException {

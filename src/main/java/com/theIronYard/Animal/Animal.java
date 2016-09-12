@@ -24,6 +24,16 @@ public class Animal {
      * @param color String
      * @param description String
      */
+    public Animal(int id, String name, AnimalType type, AnimalBreed breed, String color, String description) {
+        this.id = id;
+        this.name = name;
+        this.type = new AnimalType(type.getId(), type.getName());
+        this.breed = new AnimalBreed(breed.getId(), breed.getName());
+        this.color = color;
+        this.description = description;
+        this.notes = new ArrayList<>();
+    }
+
     public Animal(String name, AnimalType type, AnimalBreed breed, String color, String description) {
         this.name = name;
         this.type = new AnimalType(type.getId(), type.getName());

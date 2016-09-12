@@ -22,7 +22,7 @@ public class AnimalBreedRepository {
     // getters and setters
     public ResultSet getAnimalBreeds() throws SQLException {
         Statement statement = connection.createStatement();
-        return statement.executeQuery("SELECT * FROM breed");
+        return statement.executeQuery("SELECT * FROM breed ORDER BY breedid");
     }
 
     // methods

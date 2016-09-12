@@ -21,7 +21,7 @@ public class AnimalTypeRepository {
     // getters and setters
     public ResultSet getAnimalTypes() throws SQLException {
         Statement statement = connection.createStatement();
-        return statement.executeQuery("SELECT * FROM type");
+        return statement.executeQuery("SELECT * FROM type ORDER BY typeid");
     }
 
     // methods
