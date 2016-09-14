@@ -1,17 +1,11 @@
 package com.theIronYard.Animal;
 
 import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -30,7 +24,7 @@ public class AnimalRepositoryTest {
         try {
             animalList = new AnimalRepository(jdbcUrl);
             /*for () {
-                animalList.remove(i);
+                animalList.removeAnimal(i);
             }*/
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,10 +41,10 @@ public class AnimalRepositoryTest {
 /*
         // arrange
         Animal newAnimal = new Animal("myst", "", "", "grey", "skittish");
-        animalList.add(newAnimal);
+        animalList.addAnimal(newAnimal);
 
         // act
-        Animal expectedResult = animalList.get(newAnimal.getId());
+        Animal expectedResult = animalList.getAnimal(newAnimal.getBreedId());
 
         // assert
         assertThat(expectedResult, equalTo(newAnimal));
@@ -68,7 +62,7 @@ public class AnimalRepositoryTest {
         // arrange
 
         // act
-        Animal result = animalList.get(2);
+        Animal result = animalList.getAnimal(2);
 
         // assert
         assertThat(result, is(not(null)));
@@ -89,8 +83,8 @@ public class AnimalRepositoryTest {
         Animal newAnimal = new Animal("myst", "feline", "tabby", "grey", "skittish");
 
         // act
-        boolean result = animalList.add(newAnimal);
-//        boolean result = animalList.get(0);
+        boolean result = animalList.addAnimal(newAnimal);
+//        boolean result = animalList.getAnimal(0);
 
         // assert
         assertThat(result, is(true));
@@ -107,14 +101,14 @@ public class AnimalRepositoryTest {
     public void removeAnimalRemovesExpectedAnimalTest() throws SQLException {
 /*
         // arrange
-        animalList.add(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
-        animalList.add(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
-        animalList.add(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
+        animalList.addAnimal(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
+        animalList.addAnimal(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
+        animalList.addAnimal(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
         Animal newAnimal = new Animal("Myst", "feline", "calico", "grey", "skittish");
-        animalList.add(newAnimal);
+        animalList.addAnimal(newAnimal);
 
         // act
-        Animal result = animalList.remove(newAnimal.getId());
+        Animal result = animalList.removeAnimal(newAnimal.getBreedId());
 
         // assert
         assertThat(result, is(newAnimal));
@@ -130,13 +124,13 @@ public class AnimalRepositoryTest {
     public void removeAnimalHandlesIndexOutOfBoundsTest() throws SQLException {
 /*
         // arrange
-        animalList.add(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
-        animalList.add(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
-        animalList.add(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
+        animalList.addAnimal(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
+        animalList.addAnimal(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
+        animalList.addAnimal(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
         Animal expectedResult = new Animal();
 
         // act
-        Animal result = animalList.remove(expectedResult.getId() + 1);
+        Animal result = animalList.removeAnimal(expectedResult.getBreedId() + 1);
 
         // assert
         assertThat(result, is(expectedResult));
@@ -146,7 +140,7 @@ public class AnimalRepositoryTest {
     @Test
     /**
      * Given an empty AnimalRepository
-     * When contains is called with an Animal
+     * When containsAnimal is called with an Animal
      * Then false is returned
      */
     public void containsAnimalReturnsFalseWhenDbEmptyTest() throws SQLException {
@@ -154,7 +148,7 @@ public class AnimalRepositoryTest {
         Animal newAnimal = new Animal();
 
         // act
-        boolean result = animalList.contains(newAnimal);
+        boolean result = animalList.containsAnimal(newAnimal);
 
         // assert
         assertThat(result, is(false));
@@ -162,14 +156,14 @@ public class AnimalRepositoryTest {
     @Test
     /**
      * Given an empty AnimalRepository
-     * When contains is called with an index
+     * When containsAnimal is called with an index
      * Then false is returned
      */
     public void containsIntReturnsFalseWhenDbEmptyTest() throws SQLException {
         // arrange
 
         // act
-        boolean result = animalList.contains(0);
+        boolean result = animalList.containsAnimal(0);
 
         // assert
         assertThat(result, is(false));
@@ -185,11 +179,11 @@ public class AnimalRepositoryTest {
     public void listAnimalReturnsTest() throws SQLException {
 /*
         // arrange
-        animalList.add(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
-        animalList.add(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
-        animalList.add(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
+        animalList.addAnimal(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
+        animalList.addAnimal(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
+        animalList.addAnimal(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
         Animal newAnimal = new Animal("Myst", "feline", "tabby", "grey", "skittish");
-        animalList.add(newAnimal);
+        animalList.addAnimal(newAnimal);
 
         // act
         List<String> result = animalList.list();
@@ -208,15 +202,15 @@ public class AnimalRepositoryTest {
     public void editAnimalObjectSucceedsTest() throws SQLException {
 /*
         // arrange
-        animalList.add(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
-        animalList.add(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
-        animalList.add(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
+        animalList.addAnimal(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
+        animalList.addAnimal(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
+        animalList.addAnimal(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
         Animal newAnimal = new Animal("Myst", "feline", "tabby", "grey", "skittish");
         Animal expectedResult = new Animal("Rags", "feline", "tabby", "grey", "skittish");
 
         // act
         animalList.editAnimal(newAnimal, 2);
-        Animal result = animalList.get(2);
+        Animal result = animalList.getAnimal(2);
 
         // assert
         assertThat(result, equalTo(expectedResult));
@@ -232,14 +226,14 @@ public class AnimalRepositoryTest {
     public void editAnimalValuesSucceedsTest() throws SQLException {
 /*
         // arrange
-        animalList.add(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
-        animalList.add(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
-        animalList.add(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
+        animalList.addAnimal(new Animal("Shadow", "dog", "border collie", "black and white", "energetic and friendly; liked to chase balls"));
+        animalList.addAnimal(new Animal("Mia", "cat", "domestic short hair", "calico", "skittish"));
+        animalList.addAnimal(new Animal("Rags", "cat", "domestic short hair", "black and white", "likes to hunt"));
         Animal expectedResult = new Animal("Rags", "feline", "tabby", "grey", "skittish");
 
         // act
         animalList.editAnimal(2, "Myst", "feline", "tabby", "grey", "skittish");
-        Animal result = animalList.get(2);
+        Animal result = animalList.getAnimal(2);
 
         // assert
         assertThat(result, equalTo(expectedResult));

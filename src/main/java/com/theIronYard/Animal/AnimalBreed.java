@@ -4,24 +4,30 @@ package com.theIronYard.Animal;
  * Created by chris on 9/7/16.
  */
 public class AnimalBreed {
-    private int id;
+    private int breedId;
     private String name;
+    private int typeId;
 
-    public AnimalBreed(int id, String name) {
-        this.id = id;
+    public AnimalBreed(int breedId, String name, int typeId) {
+        this.breedId = breedId;
         this.name = name;
+        this.typeId = typeId;
+    }
+    public AnimalBreed(String name, int typeId) {
+        this.name = name;
+        this.typeId = typeId;
     }
 
     public AnimalBreed(String name) {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getBreedId() {
+        return breedId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBreedId(int breedId) {
+        this.breedId = breedId;
     }
 
     public String getName() {
@@ -32,6 +38,10 @@ public class AnimalBreed {
         this.name = name;
     }
 
+    public int getTypeId() {return typeId;}
+
+    public void setTypeId(int typeId) {this.typeId = typeId;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,25 +49,25 @@ public class AnimalBreed {
 
         AnimalBreed that = (AnimalBreed) o;
 
-        if (getId() != that.getId()) return false;
+        if (getBreedId() != that.getBreedId()) return false;
+        if (getTypeId() != that.getTypeId()) return false;
         return getName().equals(that.getName());
-
     }
 
     @Override
     public int hashCode() {
-        int result = getId();
+        int result = getBreedId();
         result = 31 * result + getName().hashCode();
+        result = 31 * result + getTypeId();
         return result;
     }
 
     @Override
     public String toString() {
         return "AnimalBreed{" +
-                "id=" + id +
+                "breedId=" + breedId +
                 ", name='" + name + '\'' +
+                ", typeId=" + typeId +
                 '}';
     }
-
-
 }

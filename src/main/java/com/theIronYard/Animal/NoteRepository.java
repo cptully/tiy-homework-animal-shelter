@@ -20,7 +20,7 @@ public class NoteRepository {
     }
 
     // getters and setters
-    public ArrayList<Note> getAnimalNotes() {
+    public ArrayList<Note> getNotes() {
         return animalNotes;
     }
 
@@ -29,15 +29,17 @@ public class NoteRepository {
     public boolean addNote(int animalID, String note) throws SQLException {
         // create note in memory
         Note newNote = new Note(note);
+        newNote.setAnimalId(animalID);
 
         // write note to database
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO note " +
-                "(note, date)" +
+                "(animalid, note, date)" +
                 "VALUES " +
-                "(?, ?) RETURNING noteid");
-        preparedStatement.setInt(1, newNote.getId());
+                "(?, ?, ?) RETURNING noteid");
+        preparedStatement.setInt(1, newNote.getAnimalId());
+        preparedStatement.setString(2, newNote.getContent());
         Timestamp timestamp = Timestamp.valueOf(newNote.getDate());
-        preparedStatement.setTimestamp(2, timestamp);
+        preparedStatement.setTimestamp(3, timestamp);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         // store the ID of the new note in it's object
@@ -49,7 +51,7 @@ public class NoteRepository {
         return animalNotes.add(newNote);
     }
 
-    public ResultSet getAnimalNotes(int id) throws SQLException {
+    public ResultSet getNotes(int id) throws SQLException {
         PreparedStatement preparedStatement =
                 connection.prepareStatement("SELECT n.noteid, n.note, n.date " +
                         "FROM animal AS a " +
@@ -61,8 +63,20 @@ public class NoteRepository {
         return preparedStatement.executeQuery();
     }
 
-    public boolean delete(int animalID, int noteID) {
-        return false;
+    public void removeNote(int animalID, int noteID) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("DELETE FROM note WHERE noteid = ? AND animalid = ?");
+        preparedStatement.setInt(1, noteID);
+        preparedStatement.setInt(2, animalID);
+        preparedStatement.execute();
+    }
+
+    public int size() throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT count(id) FROM note");
+
+        resultSet.next();
+        return resultSet.getInt("count");
     }
 
     public void writeDB() throws SQLException {

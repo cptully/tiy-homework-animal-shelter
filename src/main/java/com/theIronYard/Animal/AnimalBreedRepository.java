@@ -20,40 +20,70 @@ public class AnimalBreedRepository {
     }
 
     // getters and setters
-    public ResultSet getAnimalBreeds() throws SQLException {
+    public ResultSet getBreeds() throws SQLException {
         Statement statement = connection.createStatement();
         return statement.executeQuery("SELECT * FROM breed ORDER BY breedid");
     }
 
-    // methods
-    public boolean addBreed(String breed) throws SQLException {
-        // create note in memory
-        AnimalBreed animalBreed = new AnimalBreed(breed);
+    public ResultSet getBreed(int breedId) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM breed WHERE breedid = ?");
+        preparedStatement.setInt(1, breedId);
+        return preparedStatement.executeQuery();
+    }
 
+    // methods
+    public boolean addBreed(AnimalBreed animalBreed) throws SQLException {
         // write note to database
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO breed " +
-                "(breed)" +
+                "(breed, typeid) " +
                 "VALUES " +
-                "(?) RETURNING breedid");
-        preparedStatement.setInt(1, animalBreed.getId());
+                "(?, ?) RETURNING breedid");
+        preparedStatement.setString(1, animalBreed.getName());
+        preparedStatement.setInt(2, animalBreed.getTypeId());
         ResultSet resultSet = preparedStatement.executeQuery();
 
         // store the ID of the new note in it's object
         resultSet.next();
         int breedId = resultSet.getInt(1);
-        animalBreed.setId(breedId);
+        animalBreed.setBreedId(breedId);
 
         // return the result of adding the note to the ArrayList in memory
         return animalBreeds.add(animalBreed);
     }
 
-    public boolean delete(int animalID, int breedId) {
-        return false;
+    /**
+     *
+     * @param breedId database id of the breed to be deleted
+     * @param force if true delete the breed even if it is used
+     * @return a count of the animals that currently use this breed
+     * @throws SQLException
+     */
+    public int deleteBreed(int breedId, boolean force) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT count(id) FROM animal WHERE breedid = ?");
+        preparedStatement.setInt(1, breedId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        resultSet.next();
+        int count = resultSet.getInt("count");
+
+        if (count == 0 || force) {
+            preparedStatement = connection
+                    .prepareStatement("DELETE FROM breed WHERE breedid = ?");
+            preparedStatement.setInt(1, breedId);
+            preparedStatement.execute();
+            return 0;
+        }
+        return count;
     }
 
-    public void writeDB() throws SQLException {
-//        Statement stmt = connection.createStatement();
-//        stmt.executeQuery("INSERT INTO note ()");
+    public void editBreed(AnimalBreed animalBreed) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("UPDATE breed SET breed = ?, typeid = ? WHERE breedid = ?");
+        preparedStatement.setString(1, animalBreed.getName());
+        preparedStatement.setInt(2, animalBreed.getTypeId());
+        preparedStatement.setInt(3, animalBreed.getBreedId());
+        preparedStatement.execute();
     }
-
 }

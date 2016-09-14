@@ -18,39 +18,87 @@ public class Main {
             AnimalBreedRepository animalBreedRepository = new AnimalBreedRepository(jdbcUrl);
             AnimalTypeRepository animalTypeRepository = new AnimalTypeRepository(jdbcUrl);
             NoteRepository noteRepository = new NoteRepository(jdbcUrl);
-            AnimalService animals = new AnimalService(animalRepository,
+            AnimalService animalService = new AnimalService(animalRepository,
                     animalBreedRepository,
                     animalTypeRepository,
                     noteRepository);
 
-            MenuService menu = new MenuService(display, animals);
+            MenuService menuService = new MenuService(display, animalService);
 
             int choice;
+            int subChoice;
             boolean running = true;
 
             while (running) {
 
-                choice = menu.showMenu();
+                choice = menuService.showMenu();
                 switch (choice) {
-                    case 1:             //1) List animals
-                        menu.listAnimals();
-                        // manage
-                        // subchoice = submenu()
-                        // switch (subchoice)
+                    // TODO: 9/13/16 implement search
+                    case 1:             //1) List animalService
+                        menuService.listAnimals();
+                        break;
+                    case 8:
+                        subChoice = menuService.searchDB();
+                        while (subChoice != 5) {
+                            switch (subChoice) {
+                                case 1:
+                                    String name = menuService.searchByName(animalService);
+                                    break;
+                                case 2:
+                                    int typeId = menuService.searchByType(animalService);
+                                    break;
+                                case 3:
+                                    int breedId = menuService.searchByBreed(animalService);
+                                    break;
+                                case 4:
+                                    menuService.listAnimals();
+                                    break;
+                            }
+                        }
                         break;
                     case 2:             //2) Create an animal
-                        menu.addAnimal();
+                        // TODO: 9/13/16 allow breed to be blank
+                        menuService.addAnimal();
                         break;
                     case 3:             //3) View animal details
-                        menu.viewAnimalDetails();
+                        menuService.viewAnimalDetails();
                         break;
                     case 4:             //4) Edit an animal
-                        menu.editAnimal();
+                        // TODO: 9/13/16 add notes to edit animal
+                        menuService.editAnimal();
                         break;
                     case 5:             //5) Delete an animal
-                        menu.deleteAnimal();
+                        menuService.deleteAnimal();
                         break;
-                    case 6:             //6) Quit
+                    case 6:             //6) Manage DB
+                        subChoice = menuService.manageDB();
+                        while (subChoice != 7) {
+                            switch (subChoice) {
+                                case 1:     //1) add type
+                                    menuService.addType();
+                                    break;
+                                case 2:     //2) edit type
+                                    menuService.editType();
+                                    break;
+                                case 3:     //3) delete type
+                                    menuService.deleteType();
+                                    break;
+                                case 4:     //3) add breed
+                                    menuService.addBreed();
+                                    break;
+                                case 5:     //5) edit breed
+                                    menuService.editBreed();
+                                    break;
+                                case 6:     //6) delete breed
+                                    menuService.deleteBreed();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            subChoice = menuService.manageDB();
+                        }
+                        break;
+                    case 7:             //7) quit
                         running = false;
                         break;
                     default:

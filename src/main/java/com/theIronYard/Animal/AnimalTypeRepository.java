@@ -21,38 +21,67 @@ public class AnimalTypeRepository {
     // getters and setters
     public ResultSet getAnimalTypes() throws SQLException {
         Statement statement = connection.createStatement();
-        return statement.executeQuery("SELECT * FROM type ORDER BY typeid");
+        return statement.executeQuery("SELECT * FROM animaltype ORDER BY typeid");
+    }
+
+    public ResultSet getAnimalType(int typeId) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM animaltype WHERE typeid = ?");
+        preparedStatement.setInt(1, typeId);
+        return preparedStatement.executeQuery();
     }
 
     // methods
-    public boolean addType(String type) throws SQLException {
-        AnimalType animalType= new AnimalType(type);
-
+    public boolean addType(AnimalType animalType) throws SQLException {
         // write note to database
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO type " +
-                "(type)" +
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO animaltype " +
+                "(typename)" +
                 "VALUES " +
                 "(?) RETURNING typeid");
-        preparedStatement.setInt(1, animalType.getId());
+        preparedStatement.setString(1, animalType.getTypeName());
         ResultSet resultSet = preparedStatement.executeQuery();
 
         // store the ID of the new note in it's object
         resultSet.next();
         int breedId = resultSet.getInt(1);
-        animalType.setId(breedId);
+        animalType.setTypeId(breedId);
 
         // return the result of adding the note to the ArrayList in memory
         return animalTypes.add(animalType);
     }
 
-    public boolean delete(int animalID, int typeId) {
-        return false;
+    public int deleteType(int typeId) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT count(id) FROM animal WHERE typeid = ?");
+        preparedStatement.setInt(1, typeId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        resultSet.next();
+        int count = resultSet.getInt("count");
+
+        if (count == 0) {
+            preparedStatement = connection
+                    .prepareStatement("DELETE FROM animaltype WHERE typeid = ?");
+            preparedStatement.setInt(1, typeId);
+            preparedStatement.execute();
+            return 0;
+        }
+        return count;
     }
 
-    public void writeDB() throws SQLException {
-//        Statement stmt = connection.createStatement();
-//        stmt.executeQuery("INSERT INTO note ()");
+
+    public ResultSet getType(int typeId) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM animaltype WHERE typeid = ?");
+        preparedStatement.setInt(1, typeId);
+        return preparedStatement.executeQuery();
     }
 
-
+    public void editType(AnimalType animalType) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("UPDATE animaltype SET typename = ? WHERE typeid = ?");
+        preparedStatement.setString(1, animalType.getTypeName());
+        preparedStatement.setInt(2, animalType.getTypeId());
+        preparedStatement.execute();
+    }
 }

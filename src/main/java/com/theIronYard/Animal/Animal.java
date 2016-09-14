@@ -27,8 +27,8 @@ public class Animal {
     public Animal(int id, String name, AnimalType type, AnimalBreed breed, String color, String description) {
         this.id = id;
         this.name = name;
-        this.type = new AnimalType(type.getId(), type.getName());
-        this.breed = new AnimalBreed(breed.getId(), breed.getName());
+        this.type = new AnimalType(type.getTypeId(), type.getTypeName());
+        this.breed = new AnimalBreed(breed.getBreedId(), breed.getName(), breed.getTypeId());
         this.color = color;
         this.description = description;
         this.notes = new ArrayList<>();
@@ -36,8 +36,8 @@ public class Animal {
 
     public Animal(String name, AnimalType type, AnimalBreed breed, String color, String description) {
         this.name = name;
-        this.type = new AnimalType(type.getId(), type.getName());
-        this.breed = new AnimalBreed(breed.getId(), breed.getName());
+        this.type = new AnimalType(type.getTypeId(), type.getTypeName());
+        this.breed = new AnimalBreed(breed.getBreedId(), breed.getName(), breed.getTypeId());
         this.color = color;
         this.description = description;
         this.notes = new ArrayList<>();
@@ -79,7 +79,7 @@ public class Animal {
         // create blank list
         this.notes = new ArrayList<Note>();
 
-        // add notes to list instead of creating a link
+        // addAnimal notes to list instead of creating a link
         this.notes.addAll(notes);
     }
     public void addNote(Note note) {this.notes.add(note);}
@@ -90,7 +90,7 @@ public class Animal {
 
     @Override
     public String toString() {
-       return this.name + ", " + this.type.getName() + ", " + this.breed.getName() + ", " + this.color;
+       return this.name + ", " + this.type.getTypeName() + ", " + this.breed.getName() + ", " + this.color;
     }
 
     /**
@@ -102,7 +102,7 @@ public class Animal {
      * @return String
      */
     public String toString(String verbose){
-        return "Name:\t\t\t" + this.name + "\nType:\t\t" + this.type.getName() +
+        return "Name:\t\t\t" + this.name + "\nType:\t\t\t" + this.type.getTypeName() +
                 "\nBreed:\t\t\t" + this.breed.getName() + "\nColor:\t\t\t" + this.color + "\nDescription:\t" + this.description;
     }
 

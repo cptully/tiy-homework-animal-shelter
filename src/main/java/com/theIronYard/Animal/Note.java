@@ -1,7 +1,8 @@
 package com.theIronYard.Animal;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Created by chris on 9/1/16.
@@ -61,10 +62,7 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Notes{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", date=" + date +
-                '}';
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+        return id + "\t" + dateTimeFormatter.format(date) + "\t" + content;
     }
 }

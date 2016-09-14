@@ -38,7 +38,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE animal (
-    id integer NOT NULL,
+    breedId integer NOT NULL,
     name character varying(20) NOT NULL,
     color character varying(20),
     description character varying(255)
@@ -65,7 +65,7 @@ ALTER TABLE animal_id_seq OWNER TO chris;
 -- Name: animal_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chris
 --
 
-ALTER SEQUENCE animal_id_seq OWNED BY animal.id;
+ALTER SEQUENCE animal_id_seq OWNED BY animal.breedId;
 
 
 --
@@ -73,7 +73,7 @@ ALTER SEQUENCE animal_id_seq OWNED BY animal.id;
 --
 
 CREATE TABLE animalbreed (
-    id integer NOT NULL,
+    breedId integer NOT NULL,
     animalid integer NOT NULL,
     breedid integer NOT NULL
 );
@@ -99,7 +99,7 @@ ALTER TABLE animalbreed_id_seq OWNER TO chris;
 -- Name: animalbreed_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chris
 --
 
-ALTER SEQUENCE animalbreed_id_seq OWNED BY animalbreed.id;
+ALTER SEQUENCE animalbreed_id_seq OWNED BY animalbreed.breedId;
 
 
 --
@@ -107,7 +107,7 @@ ALTER SEQUENCE animalbreed_id_seq OWNED BY animalbreed.id;
 --
 
 CREATE TABLE animaltype (
-    id integer NOT NULL,
+    breedId integer NOT NULL,
     animalid integer NOT NULL,
     typeid integer NOT NULL
 );
@@ -120,12 +120,12 @@ ALTER TABLE animaltype OWNER TO chris;
 --
 
 CREATE TABLE type (
-    id integer NOT NULL,
+    breedId integer NOT NULL,
     type character varying(50) NOT NULL
 );
 
 
-ALTER TABLE type OWNER TO chris;
+ALTER TABLE animaltype OWNER TO chris;
 
 --
 -- Name: animaltype_id_seq; Type: SEQUENCE; Schema: public; Owner: chris
@@ -145,7 +145,7 @@ ALTER TABLE animaltype_id_seq OWNER TO chris;
 -- Name: animaltype_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chris
 --
 
-ALTER SEQUENCE animaltype_id_seq OWNED BY type.id;
+ALTER SEQUENCE animaltype_id_seq OWNED BY type.breedId;
 
 
 --
@@ -166,7 +166,7 @@ ALTER TABLE animaltype_id_seq1 OWNER TO chris;
 -- Name: animaltype_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: chris
 --
 
-ALTER SEQUENCE animaltype_id_seq1 OWNED BY animaltype.id;
+ALTER SEQUENCE animaltype_id_seq1 OWNED BY animaltype.breedId;
 
 
 --
@@ -174,7 +174,7 @@ ALTER SEQUENCE animaltype_id_seq1 OWNED BY animaltype.id;
 --
 
 CREATE TABLE breed (
-    id integer NOT NULL,
+    breedId integer NOT NULL,
     breed character varying(50) NOT NULL
 );
 
@@ -199,7 +199,7 @@ ALTER TABLE breed_id_seq OWNER TO chris;
 -- Name: breed_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chris
 --
 
-ALTER SEQUENCE breed_id_seq OWNED BY breed.id;
+ALTER SEQUENCE breed_id_seq OWNED BY breed.breedId;
 
 
 --
@@ -207,7 +207,7 @@ ALTER SEQUENCE breed_id_seq OWNED BY breed.id;
 --
 
 CREATE TABLE note (
-    id integer NOT NULL,
+    breedId integer NOT NULL,
     note text NOT NULL,
     date date NOT NULL,
     animalid integer
@@ -234,56 +234,56 @@ ALTER TABLE table_name_id_seq OWNER TO chris;
 -- Name: table_name_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chris
 --
 
-ALTER SEQUENCE table_name_id_seq OWNED BY note.id;
+ALTER SEQUENCE table_name_id_seq OWNED BY note.breedId;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: chris
+-- Name: breedId; Type: DEFAULT; Schema: public; Owner: chris
 --
 
-ALTER TABLE ONLY animal ALTER COLUMN id SET DEFAULT nextval('animal_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: chris
---
-
-ALTER TABLE ONLY animalbreed ALTER COLUMN id SET DEFAULT nextval('animalbreed_id_seq'::regclass);
+ALTER TABLE ONLY animal ALTER COLUMN breedId SET DEFAULT nextval('animal_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: chris
+-- Name: breedId; Type: DEFAULT; Schema: public; Owner: chris
 --
 
-ALTER TABLE ONLY animaltype ALTER COLUMN id SET DEFAULT nextval('animaltype_id_seq1'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: chris
---
-
-ALTER TABLE ONLY breed ALTER COLUMN id SET DEFAULT nextval('breed_id_seq'::regclass);
+ALTER TABLE ONLY animalbreed ALTER COLUMN breedId SET DEFAULT nextval('animalbreed_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: chris
+-- Name: breedId; Type: DEFAULT; Schema: public; Owner: chris
 --
 
-ALTER TABLE ONLY note ALTER COLUMN id SET DEFAULT nextval('table_name_id_seq'::regclass);
+ALTER TABLE ONLY animaltype ALTER COLUMN breedId SET DEFAULT nextval('animaltype_id_seq1'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: chris
+-- Name: breedId; Type: DEFAULT; Schema: public; Owner: chris
 --
 
-ALTER TABLE ONLY type ALTER COLUMN id SET DEFAULT nextval('animaltype_id_seq'::regclass);
+ALTER TABLE ONLY breed ALTER COLUMN breedId SET DEFAULT nextval('breed_id_seq'::regclass);
+
+
+--
+-- Name: breedId; Type: DEFAULT; Schema: public; Owner: chris
+--
+
+ALTER TABLE ONLY note ALTER COLUMN breedId SET DEFAULT nextval('table_name_id_seq'::regclass);
+
+
+--
+-- Name: breedId; Type: DEFAULT; Schema: public; Owner: chris
+--
+
+ALTER TABLE ONLY type ALTER COLUMN breedId SET DEFAULT nextval('animaltype_id_seq'::regclass);
 
 
 --
 -- Data for Name: animal; Type: TABLE DATA; Schema: public; Owner: chris
 --
 
-COPY animal (id, name, color, description) FROM stdin;
+COPY animal (breedId, name, color, description) FROM stdin;
 1	Mia	grey	skittish
 2	Myst	gray	tabby
 3	Ragamuffin	black & white	'Rags' for short
@@ -302,7 +302,7 @@ SELECT pg_catalog.setval('animal_id_seq', 4, true);
 -- Data for Name: animalbreed; Type: TABLE DATA; Schema: public; Owner: chris
 --
 
-COPY animalbreed (id, animalid, breedid) FROM stdin;
+COPY animalbreed (breedId, animalid, breedid) FROM stdin;
 1	1	2
 2	2	2
 3	3	1
@@ -321,7 +321,7 @@ SELECT pg_catalog.setval('animalbreed_id_seq', 4, true);
 -- Data for Name: animaltype; Type: TABLE DATA; Schema: public; Owner: chris
 --
 
-COPY animaltype (id, animalid, typeid) FROM stdin;
+COPY animaltype (breedId, animalid, typeid) FROM stdin;
 1	1	2
 2	2	2
 3	3	3
@@ -347,7 +347,7 @@ SELECT pg_catalog.setval('animaltype_id_seq1', 4, true);
 -- Data for Name: breed; Type: TABLE DATA; Schema: public; Owner: chris
 --
 
-COPY breed (id, breed) FROM stdin;
+COPY breed (breedId, breed) FROM stdin;
 1	Domestic Short Hair
 2	Domestic Medium Hair
 3	Domestic Long Hair
@@ -366,7 +366,7 @@ SELECT pg_catalog.setval('breed_id_seq', 4, true);
 -- Data for Name: note; Type: TABLE DATA; Schema: public; Owner: chris
 --
 
-COPY note (id, note, date, animalid) FROM stdin;
+COPY note (breedId, note, date, animalid) FROM stdin;
 1	Shadow is a loving energetic ball chaser	2013-08-13	\N
 2	Myst has been eating 3-4 cans of food per day and is loosing weight. Tests ordered.	2008-11-10	\N
 3	Myst has cancer of the tounge	2008-11-14	\N
@@ -384,7 +384,7 @@ SELECT pg_catalog.setval('table_name_id_seq', 3, true);
 -- Data for Name: type; Type: TABLE DATA; Schema: public; Owner: chris
 --
 
-COPY type (id, type) FROM stdin;
+COPY type (breedId, type) FROM stdin;
 1	Dog
 2	Cat
 3	Pony
@@ -397,7 +397,7 @@ COPY type (id, type) FROM stdin;
 --
 
 ALTER TABLE ONLY animal
-    ADD CONSTRAINT animal_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT animal_pkey PRIMARY KEY (breedId);
 
 
 --
@@ -405,7 +405,7 @@ ALTER TABLE ONLY animal
 --
 
 ALTER TABLE ONLY animalbreed
-    ADD CONSTRAINT animalbreed_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT animalbreed_pkey PRIMARY KEY (breedId);
 
 
 --
@@ -413,7 +413,7 @@ ALTER TABLE ONLY animalbreed
 --
 
 ALTER TABLE ONLY type
-    ADD CONSTRAINT animaltype_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT animaltype_pkey PRIMARY KEY (breedId);
 
 
 --
@@ -421,7 +421,7 @@ ALTER TABLE ONLY type
 --
 
 ALTER TABLE ONLY animaltype
-    ADD CONSTRAINT animaltype_pkey1 PRIMARY KEY (id);
+    ADD CONSTRAINT animaltype_pkey1 PRIMARY KEY (breedId);
 
 
 --
@@ -429,7 +429,7 @@ ALTER TABLE ONLY animaltype
 --
 
 ALTER TABLE ONLY breed
-    ADD CONSTRAINT breed_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT breed_pkey PRIMARY KEY (breedId);
 
 
 --
@@ -437,49 +437,49 @@ ALTER TABLE ONLY breed
 --
 
 ALTER TABLE ONLY note
-    ADD CONSTRAINT table_name_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT table_name_pkey PRIMARY KEY (breedId);
 
 
 --
 -- Name: animalType_id_uindex; Type: INDEX; Schema: public; Owner: chris
 --
 
-CREATE UNIQUE INDEX "animalType_id_uindex" ON type USING btree (id);
+CREATE UNIQUE INDEX "animalType_id_uindex" ON type USING btree (breedId);
 
 
 --
 -- Name: animal_id_uindex; Type: INDEX; Schema: public; Owner: chris
 --
 
-CREATE UNIQUE INDEX animal_id_uindex ON animal USING btree (id);
+CREATE UNIQUE INDEX animal_id_uindex ON animal USING btree (breedId);
 
 
 --
 -- Name: animalbreed_id_uindex; Type: INDEX; Schema: public; Owner: chris
 --
 
-CREATE UNIQUE INDEX animalbreed_id_uindex ON animalbreed USING btree (id);
+CREATE UNIQUE INDEX animalbreed_id_uindex ON animalbreed USING btree (breedId);
 
 
 --
 -- Name: animaltype_id_uindex; Type: INDEX; Schema: public; Owner: chris
 --
 
-CREATE UNIQUE INDEX animaltype_id_uindex ON animaltype USING btree (id);
+CREATE UNIQUE INDEX animaltype_id_uindex ON animaltype USING btree (breedId);
 
 
 --
 -- Name: breed_id_uindex; Type: INDEX; Schema: public; Owner: chris
 --
 
-CREATE UNIQUE INDEX breed_id_uindex ON breed USING btree (id);
+CREATE UNIQUE INDEX breed_id_uindex ON breed USING btree (breedId);
 
 
 --
 -- Name: table_name_id_uindex; Type: INDEX; Schema: public; Owner: chris
 --
 
-CREATE UNIQUE INDEX table_name_id_uindex ON note USING btree (id);
+CREATE UNIQUE INDEX table_name_id_uindex ON note USING btree (breedId);
 
 
 --
@@ -487,7 +487,7 @@ CREATE UNIQUE INDEX table_name_id_uindex ON note USING btree (id);
 --
 
 ALTER TABLE ONLY animalbreed
-    ADD CONSTRAINT animalbreed_animal_id_fk FOREIGN KEY (animalid) REFERENCES animal(id);
+    ADD CONSTRAINT animalbreed_animal_id_fk FOREIGN KEY (animalid) REFERENCES animal(breedId);
 
 
 --
@@ -495,7 +495,7 @@ ALTER TABLE ONLY animalbreed
 --
 
 ALTER TABLE ONLY animalbreed
-    ADD CONSTRAINT animalbreed_breed_id_fk FOREIGN KEY (breedid) REFERENCES breed(id);
+    ADD CONSTRAINT animalbreed_breed_id_fk FOREIGN KEY (breedid) REFERENCES breed(breedId);
 
 
 --
@@ -503,7 +503,7 @@ ALTER TABLE ONLY animalbreed
 --
 
 ALTER TABLE ONLY animaltype
-    ADD CONSTRAINT animaltype_animal_id_fk FOREIGN KEY (animalid) REFERENCES animal(id);
+    ADD CONSTRAINT animaltype_animal_id_fk FOREIGN KEY (animalid) REFERENCES animal(breedId);
 
 
 --
@@ -511,7 +511,7 @@ ALTER TABLE ONLY animaltype
 --
 
 ALTER TABLE ONLY animaltype
-    ADD CONSTRAINT animaltype_type_id_fk FOREIGN KEY (typeid) REFERENCES type(id);
+    ADD CONSTRAINT animaltype_type_id_fk FOREIGN KEY (typeid) REFERENCES type(breedId);
 
 
 --
@@ -519,7 +519,7 @@ ALTER TABLE ONLY animaltype
 --
 
 ALTER TABLE ONLY note
-    ADD CONSTRAINT note_animal_id_fk FOREIGN KEY (animalid) REFERENCES animal(id);
+    ADD CONSTRAINT note_animal_id_fk FOREIGN KEY (animalid) REFERENCES animal(breedId);
 
 
 --

@@ -1,7 +1,6 @@
 package com.theIronYard.Animal;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 /**
  * Created by chris on 8/20/16.
@@ -21,13 +20,13 @@ public class AnimalRepository {
     }
 
     // private methods
-    
+
     // methods used by other Animal Service
-    ResultSet get(int id) throws SQLException {
+    ResultSet getAnimal(int id) throws SQLException {
         PreparedStatement preparedStatement = connection
-                .prepareStatement("SELECT a.id, a.name, t.typeid, t.type, b.breedid, b.breed, a.color, a.description " +
+                .prepareStatement("SELECT a.id, a.name, t.typeid, t.typename, b.breedid, b.breed, b.typeid, a.color, a.description " +
                         "FROM animal AS a " +
-                        "JOIN type AS t " +
+                        "JOIN animaltype AS t " +
                         "ON a.typeid = t.typeid " +
                         "JOIN breed AS b " +
                         "ON a.breedid = b.breedid " +
@@ -38,14 +37,14 @@ public class AnimalRepository {
         return preparedStatement.executeQuery();
     }
 
-    Animal add(Animal animal) throws SQLException {
+    Animal addAnimal(Animal animal) throws SQLException {
         PreparedStatement preparedStatement = connection.
                 prepareStatement("INSERT INTO animal (name, typeid, breedid, color, description) " +
                         "VALUES (?, ?, ?, ?, ?) RETURNING id");
 
         preparedStatement.setString(1, animal.getName());
-        preparedStatement.setInt(2, animal.getType().getId());
-        preparedStatement.setInt(3, animal.getBreed().getId());
+        preparedStatement.setInt(2, animal.getType().getTypeId());
+        preparedStatement.setInt(3, animal.getBreed().getBreedId());
         preparedStatement.setString(4, animal.getColor());
         preparedStatement.setString(5, animal.getDescription());
 
@@ -58,7 +57,7 @@ public class AnimalRepository {
         return animal;
     }
 
-    void remove(int id) throws SQLException {
+    void removeAnimal(int id) throws SQLException {
         PreparedStatement preparedStatement =
                 connection.prepareStatement("DELETE FROM animal WHERE id=?");
 
@@ -68,7 +67,7 @@ public class AnimalRepository {
         //return new Animal();
     }
 
-    boolean contains(int id) throws SQLException {
+    boolean containsAnimal(int id) throws SQLException {
         PreparedStatement preparedStatement = connection
                 .prepareStatement("SELECT count(1) FROM animal WHERE id = ?");
         preparedStatement.setInt(1, id);
@@ -81,7 +80,7 @@ public class AnimalRepository {
         return false;
     }
 
-    boolean contains(Animal animal) throws SQLException {
+    boolean containsAnimal(Animal animal) throws SQLException {
         PreparedStatement preparedStatement = connection
                 .prepareStatement("SELECT count(1) FROM animal WHERE id = ?");
         preparedStatement.setInt(1, animal.getId());
@@ -96,9 +95,9 @@ public class AnimalRepository {
 
     ResultSet list() throws SQLException {
         Statement statement = connection.createStatement();
-        return statement.executeQuery("SELECT a.id, a.name, a.typeid, t.type, a.breedid, b.breed, a.color, a.description " +
+        return statement.executeQuery("SELECT a.id, a.name, a.typeid, t.typename, a.breedid, b.breed, b.typeid, a.color, a.description " +
                 "FROM animal AS a " +
-                "JOIN type AS t " +
+                "JOIN animaltype AS t " +
                 "ON t.typeid = a.typeid " +
                 "JOIN breed AS b " +
                 "ON b.breedid = a.breedid " +
@@ -118,8 +117,8 @@ public class AnimalRepository {
         preparedStatement.setString(1, animal.getName());
         preparedStatement.setString(2, animal.getColor());
         preparedStatement.setString(3, animal.getDescription());
-        preparedStatement.setInt(4, animal.getType().getId());
-        preparedStatement.setInt(5, animal.getBreed().getId());
+        preparedStatement.setInt(4, animal.getType().getTypeId());
+        preparedStatement.setInt(5, animal.getBreed().getBreedId());
         preparedStatement.setInt(6, animal.getId());
 
         preparedStatement.execute();
@@ -133,6 +132,47 @@ public class AnimalRepository {
         return resultSet.getInt("count");
     }
 
+    public ResultSet searchByName(String name) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT a.id, a.name, t.typeid, t.typename," +
+                        " b.breedid, b.breed, a.color " +
+                        "FROM animal AS a " +
+                        "JOIN animaltype as t " +
+                        "ON a.typeid = t.typeid " +
+                        "JOIN breed AS b " +
+                        "ON a.breedid = b.breedid " +
+                        "WHERE a.name = ?");
+        preparedStatement.setString(1, name);
+        return preparedStatement.executeQuery();
+    }
+
+    public ResultSet searchByType(int typeId) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT a.id, a.name, t.typeid, t.typename," +
+                        " b.breedid, b.breed, a.color " +
+                        "FROM animal AS a " +
+                        "JOIN animaltype as t " +
+                        "ON a.typeid = t.typeid " +
+                        "JOIN breed AS b " +
+                        "ON a.breedid = b.breedid " +
+                        "WHERE a.typeid = ?");
+        preparedStatement.setInt(1, typeId);
+        return preparedStatement.executeQuery();
+    }
+
+    public ResultSet searchByBreed(int breedId) throws SQLException {
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT a.id, a.name, t.typeid, t.typename," +
+                        " b.breedid, b.breed, a.color " +
+                        "FROM animal AS a " +
+                        "JOIN animaltype as t " +
+                        "ON a.typeid = t.typeid " +
+                        "JOIN breed AS b " +
+                        "ON a.breedid = b.breedid " +
+                        "WHERE a.breedid = ?");
+        preparedStatement.setInt(1, breedId);
+        return preparedStatement.executeQuery();
+    }
 }
 
 

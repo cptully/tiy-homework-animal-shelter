@@ -51,13 +51,13 @@ public class AnimalTest {
         newAnimal.setType(animalType);
 
         // assert
-        assertThat(newAnimal.getType().getName(), is("canine"));
+        assertThat(newAnimal.getType().getTypeName(), is("canine"));
     }
 
     @Test
     public void animalSetBreedTest() {
         // arrange
-        AnimalBreed animalBreed = new AnimalBreed(-1, "border collie");
+        AnimalBreed animalBreed = new AnimalBreed(-1, "border collie", 1);
 
         // act
         newAnimal.setBreed(animalBreed);
@@ -102,7 +102,7 @@ public class AnimalTest {
     public void animalToStringTest() {
         // arrange
         AnimalType animalType = new AnimalType(-1, "feline");
-        AnimalBreed animalBreed = new AnimalBreed(-1, "calico");
+        AnimalBreed animalBreed = new AnimalBreed(-1, "calico", 2);
         newAnimal = new Animal("myst", animalType, animalBreed, "grey", "description");
 
         // act
@@ -116,7 +116,7 @@ public class AnimalTest {
     public void animalToStringVerboseTest() {
         // arrange
         AnimalType animalType = new AnimalType(-1, "feline");
-        AnimalBreed animalBreed = new AnimalBreed(-1, "calico");
+        AnimalBreed animalBreed = new AnimalBreed(-1, "calico", 2);
         newAnimal = new Animal("myst", animalType, animalBreed, "grey", "description");
 
         // act

@@ -16,19 +16,19 @@ public class AnimalType {
         this.name = name;
     }
 
-    public int getId() {
+    public int getTypeId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setTypeId(int id) {
         this.id = id;
     }
 
-    public String getName() {
+    public String getTypeName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setTypeName(String name) {
         this.name = name;
     }
 
@@ -39,15 +39,15 @@ public class AnimalType {
 
         AnimalType that = (AnimalType) o;
 
-        if (getId() != that.getId()) return false;
-        return getName().equals(that.getName());
+        if (getTypeId() != that.getTypeId()) return false;
+        return getTypeName().equals(that.getTypeName());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getId();
-        result = 31 * result + getName().hashCode();
+        int result = getTypeId();
+        result = 31 * result + getTypeName().hashCode();
         return result;
     }
 

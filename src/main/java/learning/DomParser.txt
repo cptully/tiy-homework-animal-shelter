@@ -62,15 +62,15 @@ public class DomParser {
     private Employee getEmployee(Element empEl) {
 
         //for each <employee> element get text or int values of
-        //name ,id, age and name
+        //name ,breedId, age and name
         String name = getTextValue(empEl,"Name");
-        int id = getIntValue(empEl,"Id");
+        int breedId = getIntValue(empEl,"Id");
         int age = getIntValue(empEl,"Age");
 
         String type = empEl.getAttribute("type");
 
         //Create a new Employee with the value read from the xml nodes
-        Employee e = new Employee(name,id,age,type);
+        Employee e = new Employee(name,breedId,age,type);
 
         return e;
     }
