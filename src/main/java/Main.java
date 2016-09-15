@@ -4,6 +4,7 @@ import com.theIronYard.Animal.*;
 //import com.theIronYard.Animal.Notes;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by chris on 8/12/16.
@@ -11,7 +12,6 @@ import java.sql.SQLException;
 public class Main {
 
     public static void main(String [] args) {
-        DisplayService display = new DisplayService();
         try {
             String jdbcUrl = "jdbc:postgresql://localhost/animalrepository_test";
             AnimalRepository animalRepository = new AnimalRepository(jdbcUrl);
@@ -23,82 +23,98 @@ public class Main {
                     animalTypeRepository,
                     noteRepository);
 
-            MenuService menuService = new MenuService(display, animalService);
+            MenuService menuService = new MenuService(animalService);
 
             int choice;
             int subChoice;
             boolean running = true;
+            ArrayList<Animal> animals;
 
             while (running) {
 
-                choice = menuService.showMenu();
+                choice = menuService.promptForMainMenuSelection();
                 switch (choice) {
-                    // TODO: 9/13/16 implement search
-                    case 1:             //1) List animalService
-                        menuService.listAnimals();
+                    case 1:             //2) Create an animal
+                        // TODO: 9/13/16 allow breed to be blank
+                        Animal newAnimal = menuService.promptForNewAnimal();
+                        animalService.addAnimal(newAnimal);
                         break;
-                    case 8:
-                        subChoice = menuService.searchDB();
-                        while (subChoice != 5) {
+                    case 2:
+                        subChoice = menuService.promptForSearchMethod();
+                        //while (subChoice != 5) {
                             switch (subChoice) {
                                 case 1:
-                                    String name = menuService.searchByName(animalService);
+                                    menuService.promptForNameToSearch();
                                     break;
                                 case 2:
-                                    int typeId = menuService.searchByType(animalService);
+                                    menuService.promptForTypeToSearch();
                                     break;
                                 case 3:
-                                    int breedId = menuService.searchByBreed(animalService);
+                                    menuService.promptForBreedToSearch();
                                     break;
                                 case 4:
-                                    menuService.listAnimals();
+                                    menuService.displayAnimals();
                                     break;
                             }
+                        //}
+                        Animal animal = menuService.promptForAnimalToView();
+                        int noteChoice = menuService.promptForEditAnimalMenuSelection();
+                        switch (noteChoice) {
+                            case 1:         // edit animal
+                                newAnimal = menuService.promptForNewAnimalData(animal);
+                                animalService.addAnimal(newAnimal);
+
+                                break;
+                            case 2:         // delete animal
+                                if (menuService.promptForAnimalToDelete(animal)) {
+                                    animalService.deleteAnimal(animal.getId());
+                                }
+                                break;
+                            case 3:         // add note
+                                animal = menuService.promptForNewNote(animal);
+                                animalService.editAnimal(animal);
+                                break;
+                            case 4:         // delete note
+                                int deleteId = menuService.promptForNoteToDelete(animal);
+                                if (deleteId != 0) {
+                                    animalService.deleteNote(animal.getId(), deleteId);
+                                }
+                                break;
+                            default:        // return to main menu
+                                break;
                         }
                         break;
-                    case 2:             //2) Create an animal
-                        // TODO: 9/13/16 allow breed to be blank
-                        menuService.addAnimal();
-                        break;
-                    case 3:             //3) View animal details
-                        menuService.viewAnimalDetails();
-                        break;
-                    case 4:             //4) Edit an animal
-                        // TODO: 9/13/16 add notes to edit animal
-                        menuService.editAnimal();
-                        break;
-                    case 5:             //5) Delete an animal
-                        menuService.deleteAnimal();
-                        break;
-                    case 6:             //6) Manage DB
-                        subChoice = menuService.manageDB();
+                    case 3:             //6) Manage DB
+                        subChoice = 0;
                         while (subChoice != 7) {
+                            subChoice = menuService.promptForDbManagementSelection();
                             switch (subChoice) {
                                 case 1:     //1) add type
-                                    menuService.addType();
+                                    AnimalType animalType = menuService.promptForNewType();
+                                    animalService.addType(animalType);
                                     break;
                                 case 2:     //2) edit type
-                                    menuService.editType();
+                                    int typeId = menuService.promptForTypeToEdit();
+                                    menuService.promptForNewTypeName(typeId);
                                     break;
                                 case 3:     //3) delete type
-                                    menuService.deleteType();
+                                    menuService.promptForTypeToDelete();
                                     break;
                                 case 4:     //3) add breed
-                                    menuService.addBreed();
+                                    menuService.promptForNewBreed();
                                     break;
                                 case 5:     //5) edit breed
-                                    menuService.editBreed();
+                                    menuService.promptForNewBreedData();
                                     break;
                                 case 6:     //6) delete breed
-                                    menuService.deleteBreed();
+                                    menuService.promptForBreedToDelete();
                                     break;
                                 default:
                                     break;
                             }
-                            subChoice = menuService.manageDB();
                         }
                         break;
-                    case 7:             //7) quit
+                    case 4:             //7) quit
                         running = false;
                         break;
                     default:

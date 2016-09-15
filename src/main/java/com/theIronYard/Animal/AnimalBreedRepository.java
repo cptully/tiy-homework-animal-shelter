@@ -55,11 +55,10 @@ public class AnimalBreedRepository {
     /**
      *
      * @param breedId database id of the breed to be deleted
-     * @param force if true delete the breed even if it is used
      * @return a count of the animals that currently use this breed
      * @throws SQLException
      */
-    public int deleteBreed(int breedId, boolean force) throws SQLException {
+    public int deleteBreed(int breedId) throws SQLException {
         PreparedStatement preparedStatement = connection
                 .prepareStatement("SELECT count(id) FROM animal WHERE breedid = ?");
         preparedStatement.setInt(1, breedId);
@@ -68,7 +67,7 @@ public class AnimalBreedRepository {
         resultSet.next();
         int count = resultSet.getInt("count");
 
-        if (count == 0 || force) {
+        if (count == 0) {
             preparedStatement = connection
                     .prepareStatement("DELETE FROM breed WHERE breedid = ?");
             preparedStatement.setInt(1, breedId);

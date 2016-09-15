@@ -135,7 +135,7 @@ public class AnimalRepository {
     public ResultSet searchByName(String name) throws SQLException {
         PreparedStatement preparedStatement = connection
                 .prepareStatement("SELECT a.id, a.name, t.typeid, t.typename," +
-                        " b.breedid, b.breed, a.color " +
+                        " b.breedid, b.breed, a.color, a.description " +
                         "FROM animal AS a " +
                         "JOIN animaltype as t " +
                         "ON a.typeid = t.typeid " +
@@ -149,7 +149,7 @@ public class AnimalRepository {
     public ResultSet searchByType(int typeId) throws SQLException {
         PreparedStatement preparedStatement = connection
                 .prepareStatement("SELECT a.id, a.name, t.typeid, t.typename," +
-                        " b.breedid, b.breed, a.color " +
+                        " b.breedid, b.breed, a.color, a.description " +
                         "FROM animal AS a " +
                         "JOIN animaltype as t " +
                         "ON a.typeid = t.typeid " +
@@ -163,7 +163,7 @@ public class AnimalRepository {
     public ResultSet searchByBreed(int breedId) throws SQLException {
         PreparedStatement preparedStatement = connection
                 .prepareStatement("SELECT a.id, a.name, t.typeid, t.typename," +
-                        " b.breedid, b.breed, a.color " +
+                        " b.breedid, b.breed, a.color, a.description " +
                         "FROM animal AS a " +
                         "JOIN animaltype as t " +
                         "ON a.typeid = t.typeid " +

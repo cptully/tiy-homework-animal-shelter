@@ -24,7 +24,7 @@ public class AnimalRepositoryTest {
         try {
             animalList = new AnimalRepository(jdbcUrl);
             /*for () {
-                animalList.removeAnimal(i);
+                animalList.deleteAnimal(i);
             }*/
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,7 +108,7 @@ public class AnimalRepositoryTest {
         animalList.addAnimal(newAnimal);
 
         // act
-        Animal result = animalList.removeAnimal(newAnimal.getBreedId());
+        Animal result = animalList.deleteAnimal(newAnimal.getBreedId());
 
         // assert
         assertThat(result, is(newAnimal));
@@ -130,7 +130,7 @@ public class AnimalRepositoryTest {
         Animal expectedResult = new Animal();
 
         // act
-        Animal result = animalList.removeAnimal(expectedResult.getBreedId() + 1);
+        Animal result = animalList.deleteAnimal(expectedResult.getBreedId() + 1);
 
         // assert
         assertThat(result, is(expectedResult));

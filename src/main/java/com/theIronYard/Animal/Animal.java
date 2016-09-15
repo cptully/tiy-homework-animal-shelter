@@ -90,7 +90,7 @@ public class Animal {
 
     @Override
     public String toString() {
-       return this.name + ", " + this.type.getTypeName() + ", " + this.breed.getName() + ", " + this.color;
+       return this.id + "\t" + this.name + "\t" + this.type.getTypeName() + "\t" + this.breed.getName() + "\t" + this.color;
     }
 
     /**

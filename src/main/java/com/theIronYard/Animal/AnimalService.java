@@ -145,11 +145,11 @@ public class AnimalService {
     }
 
     /**
-     * removeAnimal removes the selected animal from the repository
+     * deleteAnimal removes the selected animal from the repository
      *
-     * @param id the zero based index of the animal to removeAnimal
+     * @param id the zero based index of the animal to deleteAnimal
      */
-    public void removeAnimal(int id) throws SQLException {
+    public void deleteAnimal(int id) throws SQLException {
         animalRepository.removeAnimal(id);}
 
     public boolean contains(Animal animal) throws SQLException { return animalRepository.containsAnimal(animal.getId()); }
@@ -158,7 +158,7 @@ public class AnimalService {
         return animalRepository.containsAnimal(id);
     }
 
-    public void removeNote(int animalId, int noteId) throws SQLException {
+    public void deleteNote(int animalId, int noteId) throws SQLException {
         noteRepository.removeNote(animalId, noteId);
     }
 
@@ -168,8 +168,8 @@ public class AnimalService {
         animalBreedRepository.addBreed(breed);
     }
 
-    public int deleteBreed(int breedId, boolean force) throws SQLException {
-        return animalBreedRepository.deleteBreed(breedId, force);
+    public int deleteBreed(int breedId) throws SQLException {
+        return animalBreedRepository.deleteBreed(breedId);
     }
 
     public ArrayList<AnimalBreed> listBreeds() throws SQLException {
@@ -252,6 +252,8 @@ public class AnimalService {
                     newBreed,
                     resultSet.getString("color"),
                     resultSet.getString("description"));
+            ArrayList<Note> notes = listNotes(newAnimal.getId());
+            newAnimal.setNotes(notes);
             animals.add(newAnimal);
         }
 
